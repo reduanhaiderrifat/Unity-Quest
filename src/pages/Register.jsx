@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 const Register = () => {
-  const { createUser, googleUser, githubUser } = useAuth();
+  const { createUser, googleUser, githubUser, updateUser } = useAuth();
 
   const {
     register,
@@ -19,6 +19,7 @@ const Register = () => {
     console.log(data);
     createUser(email, password)
       .then((result) => {
+        updateUser(username, photo);
         console.log(result.user);
       })
       .catch((error) => {
@@ -87,6 +88,7 @@ const Register = () => {
                   type="text"
                   placeholder="PhotoURL"
                   name="photo"
+                  {...register("photo")}
                   className="input input-bordered"
                 />
               </div>

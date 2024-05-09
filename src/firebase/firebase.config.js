@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAlUNQoZY_dwtaoJRpER-Cay5fSoY3edFI",
-  authDomain: "volunteer-management-web.firebaseapp.com",
-  projectId: "volunteer-management-web",
-  storageBucket: "volunteer-management-web.appspot.com",
-  messagingSenderId: "640044481513",
-  appId: "1:640044481513:web:6e5dcc3e5d916b814d2978",
+  apiKey: import.meta.env.APIKEY,
+  authDomain: import.meta.env.AUTHDOMAIN,
+  projectId: import.meta.env.PROJECTID,
+  storageBucket: import.meta.env.STORAGEBUCKET,
+  messagingSenderId: import.meta.env.MESSAGINGSENDERID,
+  appId: import.meta.env.APPID,
 };
 
 // Initialize Firebase

@@ -4,6 +4,9 @@ import Home from "../pages/Home";
 import NeedVolunter from "../pages/NeedVolunter";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import AddVholenteerPost from "../pages/AddVholenteerPost";
+import ManagementPost from "../pages/ManagementPost";
+import RequestPost from "../pages/RequestPost";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +30,16 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: "/",
-        element: <Home />,
+        path: "/addPost",
+        element: <AddVholenteerPost />,
+      },
+      {
+        path: "/managePost",
+        element: <ManagementPost />,
+      },
+      {
+        path: "/requestPost",
+        element: <RequestPost />,
       },
     ],
   },
