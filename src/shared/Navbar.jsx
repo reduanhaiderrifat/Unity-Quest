@@ -144,6 +144,7 @@ const Navbar = () => {
         toast.error(error.message);
       });
   };
+
   return (
     <div>
       <div className="my-4">

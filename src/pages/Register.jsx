@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 const Register = () => {
   const { createUser, googleUser, githubUser, updateUser } = useAuth();
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -27,7 +27,30 @@ const Register = () => {
         toast.error(error.message.split(":")[1]);
       });
   };
-
+  const handleGoogle = () => {
+    googleUser()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state ? location.state : "/");
+        toast.success("User login with google successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
+  const handleGithub = () => {
+    githubUser()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state ? location.state : "/");
+        toast.success("User login with github successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
   return (
     <div>
       <div className="hero bg-[#00684A] ">
@@ -44,14 +67,14 @@ const Register = () => {
             </div>
             <div className="flex  flex-col gap-3 mx-8">
               <button
-                onClick={googleUser}
+                onClick={handleGoogle}
                 className="btn w-full bg-transparent hover:bg-transparent"
               >
                 <FcGoogle size={30} />
                 Sing up with Google
               </button>
               <button
-                onClick={githubUser}
+                onClick={handleGithub}
                 className="btn w-full bg-transparent hover:bg-transparent"
               >
                 <FaGithub size={30} />

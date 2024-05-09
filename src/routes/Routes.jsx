@@ -7,11 +7,14 @@ import Register from "../pages/Register";
 import AddVholenteerPost from "../pages/AddVholenteerPost";
 import ManagementPost from "../pages/ManagementPost";
 import RequestPost from "../pages/RequestPost";
+import PriviteRoute from "../privete/PriviteRoute";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainlayOut />,
+    errorElement: <NotFoundPage />,
     children: [
       {
         path: "/",
@@ -31,15 +34,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/addPost",
-        element: <AddVholenteerPost />,
+        element: (
+          <PriviteRoute>
+            {" "}
+            <AddVholenteerPost />
+          </PriviteRoute>
+        ),
       },
       {
         path: "/managePost",
-        element: <ManagementPost />,
+        element: (
+          <PriviteRoute>
+            <ManagementPost />
+          </PriviteRoute>
+        ),
       },
       {
         path: "/requestPost",
-        element: <RequestPost />,
+        element: (
+          <PriviteRoute>
+            <RequestPost />
+          </PriviteRoute>
+        ),
       },
     ],
   },
