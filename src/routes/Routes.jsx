@@ -9,6 +9,8 @@ import ManagementPost from "../pages/ManagementPost";
 import RequestPost from "../pages/RequestPost";
 import PriviteRoute from "../privete/PriviteRoute";
 import NotFoundPage from "../pages/NotFoundPage";
+import VeiwDetailsVolunteer from "../components/VeiwDetailsVolunteer";
+import BeVolunteer from "../components/BeVolunteer";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,22 @@ const router = createBrowserRouter([
         element: (
           <PriviteRoute>
             <RequestPost />
+          </PriviteRoute>
+        ),
+      },
+      {
+        path: "/volunteerDetails/:id",
+        element: (
+          <PriviteRoute>
+            <VeiwDetailsVolunteer />
+          </PriviteRoute>
+        ),
+      },
+      {
+        path: "/bevolunteer/:id",
+        element: (
+          <PriviteRoute>
+            <BeVolunteer />
           </PriviteRoute>
         ),
       },
