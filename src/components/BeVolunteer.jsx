@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 const BeVolunteer = () => {
   const [singleData, setSingleData] = useState({});
   const [loader, sestLoading] = useState(true);
@@ -53,7 +54,7 @@ const BeVolunteer = () => {
     const number = form.number.value;
     const Organaization_name = form.Organaization_name.value;
     const organizer_email = form.organizer_email.value;
-    const postData = {
+    const requestData = {
       title,
       thumbnail,
       location,
@@ -66,7 +67,25 @@ const BeVolunteer = () => {
       Organaization_name,
       organizer_email,
     };
-    console.log(postData);
+    console.log(requestData);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_URL_SERVER}/request`,
+        requestData,
+        { withCredentials: true }
+      );
+      if (response.data.insertedId) {
+        Swal.fire({
+          title: "Good job!",
+          text: "Post successfully add!",
+          icon: "success",
+        });
+      }
+      console.log(response.data);
+      form.reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div>
