@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import useAuth from "../hooks/useAuth";
@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 const Login = () => {
   const { singInUser, googleUser, githubUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,

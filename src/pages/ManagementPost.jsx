@@ -28,6 +28,16 @@ const ManagementPost = () => {
       <span className="loading loading-spinner loading-lg"></span>
     </div>;
   }
+
+  if (!posts) {
+    return (
+      <div className="">
+        <h2>NO DATA AVAILABLE</h2>
+        <p>PLEASE! ADD SOME POST</p>
+        <Link to="/addPost">Add Post</Link>
+      </div>
+    );
+  }
   return (
     <div>
       <p>this is Management post</p>
