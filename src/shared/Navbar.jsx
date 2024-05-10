@@ -8,6 +8,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const { user, loading, updateUser, logOut } = useAuth();
@@ -52,7 +53,9 @@ const Navbar = () => {
       <li>
         <div className="dropdown dropdown-right md:dropdown-right lg:dropdown-left  dropdown-hover">
           <div tabIndex={0} role="button" className=" m-1">
-            <p className=" font-bold ">My Profile </p>
+            <p className=" font-bold flex items-center gap-2">
+              My Profile <IoIosArrowDown />
+            </p>
           </div>
           <ul
             tabIndex={0}

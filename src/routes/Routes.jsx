@@ -11,6 +11,7 @@ import PriviteRoute from "../privete/PriviteRoute";
 import NotFoundPage from "../pages/NotFoundPage";
 import VeiwDetailsVolunteer from "../components/VeiwDetailsVolunteer";
 import BeVolunteer from "../components/BeVolunteer";
+import Update from "../pages/Update";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,14 @@ const router = createBrowserRouter([
         element: (
           <PriviteRoute>
             <BeVolunteer />
+          </PriviteRoute>
+        ),
+      },
+      {
+        path: "/update/:id",
+        element: (
+          <PriviteRoute>
+            <Update />
           </PriviteRoute>
         ),
       },

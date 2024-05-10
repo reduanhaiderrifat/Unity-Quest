@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaUsers } from "react-icons/fa";
 import { IoMdLocate } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 
@@ -55,7 +56,7 @@ const VeiwDetailsVolunteer = () => {
           <div className="flex justify-between mx-[12%]">
             <div className="">
               <h2 className="mb-1 text-xl font-semibold">{category}</h2>
-              <h1 className="mb-1 text-2xl font-semibold">{title}</h1>
+              <h1 className="mb-1 text-4xl font-bold">{title}</h1>
             </div>
             <p>
               <span className=" font-bold">Deadline</span>:{" "}
@@ -66,11 +67,11 @@ const VeiwDetailsVolunteer = () => {
           <div className="flex flex-wrap items-center justify-around mt-12">
             <div className="space-x-2">
               <p className=" text-lg font-bold">
-                <span className="text-xl"> Organaization_name </span> :{" "}
+                <span className="text-xl"> Organaization_Name </span> :{" "}
                 {Organaization_name}
               </p>
               <p className=" text-lg font-bold">
-                <span className="text-xl">Organaization_name</span> :{" "}
+                <span className="text-xl">Organaization_Email</span> :{" "}
                 {organizer_email}
               </p>
             </div>
@@ -82,12 +83,13 @@ const VeiwDetailsVolunteer = () => {
                   <span className="text-lg text-blue-500">{location}</span>
                 </span>
               </p>
-              <p>
+              <p className="flex items-center">
                 {" "}
                 <span className=" text-lg font-bold">
                   Number of Volunteers : {""}
                 </span>
-                {number}
+                <FaUsers size={25} />{" "}
+                <span className="ml-3 text-lg">{number}</span>
               </p>
             </div>
           </div>
@@ -99,7 +101,10 @@ const VeiwDetailsVolunteer = () => {
               Be Volunteer
             </Link>
           </div>
-          <p className="text-lg dark:text-gray-600 mt-12">{description}</p>
+          <p className="text-lg dark:text-gray-600 mt-12">
+            <span className=" font-bold text-lg"> Description</span> :{" "}
+            {description}
+          </p>
         </div>
       </div>
     </div>
