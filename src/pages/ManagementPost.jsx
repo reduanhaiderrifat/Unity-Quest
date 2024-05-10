@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManagementPost = () => {
   const [posts, setPosts] = useState();
@@ -22,6 +23,27 @@ const ManagementPost = () => {
 
     getData();
   }, [user]);
+
+  //Delete
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_URL_SERVER}/delete/${id}`
+      );
+      console.log(data);
+      if (data.deletedCount > 0) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your Product has been deleted.",
+          icon: "success",
+        });
+        const remaing = posts.filter((post) => post._id !== id);
+        setPosts(remaing);
+      }
+    } catch (error) {
+      console.error("Error deleting product:", error);
+    }
+  };
 
   if (loader) {
     <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
@@ -77,7 +99,12 @@ const ManagementPost = () => {
                       </Link>
                     </td>
                     <td>
-                      <button className="btn btn-primary">Delete</button>
+                      <button
+                        onClick={() => handleDelete(post._id)}
+                        className="btn btn-primary"
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 ))}
