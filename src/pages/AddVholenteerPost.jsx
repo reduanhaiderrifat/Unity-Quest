@@ -54,7 +54,7 @@ const AddVholenteerPost = () => {
   return (
     <div>
       <form onSubmit={handlePost}>
-        <div className="flex items-center border p-4 bg-[#111827] gap-4">
+        <div className="flex items-center  p-4 bg-[#111827] gap-4">
           <div className="w-1/3 text-white font-semibold space-y-4">
             <h2 className="text-xl">Information for volunteers</h2>
             <p className="text-lg">
