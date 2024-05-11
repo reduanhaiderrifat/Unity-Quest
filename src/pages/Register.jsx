@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { FaGithub } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useState } from "react";
 const Register = () => {
-  const { createUser, googleUser, githubUser, updateUser } = useAuth();
+  const [error, setError] = useState("");
+  const [showPassowrd, setShowPassword] = useState(false);
+  const [passwordError, setpasswordError] = useState("");
+  const { createUser, googleUser, githubUser, updateUser, loading } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -17,14 +21,40 @@ const Register = () => {
   const onSubmit = (data) => {
     const { username, photo, password, email } = data;
     console.log(data);
+    setError("");
+    setpasswordError("");
+
+    if (password.length < 6) {
+      setpasswordError("password should be at least 6 characters or longer");
+      toast.error("password should be at least 6 characters or longer");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setpasswordError("Password should be at least one uppercase");
+      toast.error("Password should be at least one uppercase");
+      return;
+    }
+    if (!/(?=.*[a-z])/.test(password)) {
+      setpasswordError("Password should be at least one lowercase");
+      toast.error("Password should be at least one lowercase");
+      return;
+    }
+    if (!/(?=.*[@$!%*?&])/.test(password)) {
+      setpasswordError("Password should be at least one special character");
+      toast.error("Password should be at least one special character");
+      return;
+    }
     createUser(email, password)
       .then((result) => {
         updateUser(username, photo);
+        navigate("/");
+        toast.success("User create successfully");
         console.log(result.user);
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message.split(":")[1]);
+        setError(error?.message.split(":")[1]);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   const handleGoogle = () => {
@@ -36,7 +66,7 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   const handleGithub = () => {
@@ -48,12 +78,19 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   return (
     <div>
-      <div className="hero bg-[#00684A] ">
+      <div className="flex bg-[#01456A] overflow-hidden">
+        <div className="hidden lg:flex xl:flex">
+          <img
+            className="h-full w-[1400px]"
+            src="https://i.ibb.co/5YH4WrC/lohup.jpg"
+            alt=""
+          />
+        </div>
         <div className="hero-content w-full">
           <div className="card w-[500px] bg-base-100">
             <div className="card-body">
@@ -130,26 +167,39 @@ const Register = () => {
                 {errors.email && (
                   <span className=" text-red-500">This field is required</span>
                 )}{" "}
-                {/* <span className=" text-red-500">{emailError}</span> */}
+                <span className=" text-red-500">{error}</span>
               </div>
               <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-lg font-semibold">
-                    Password*
-                  </span>
+                <span className="label-text text-lg font-semibold">
+                  Password*
+                </span>
+                <label className="label relative">
+                  <input
+                    type={showPassowrd ? "text" : "password"}
+                    placeholder="password"
+                    className="input input-bordered w-full"
+                    {...register("password", { required: true })}
+                  />
+                  <a
+                    className="absolute right-4"
+                    onClick={() => setShowPassword(!showPassowrd)}
+                  >
+                    {!showPassowrd ? <FaEyeSlash /> : <FaEye />}
+                  </a>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  {...register("password", { required: true })}
-                />{" "}
                 {errors.password && (
                   <span className=" text-red-500">This field is required</span>
                 )}
+                <span className="text-red-600 font-bold">{passwordError}</span>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn bg-gradient-to-r text-white font-semibold text-lg from-green-500 to-blue-500">
+                  {loading ? (
+                    <span className="loading loading-spinner loading-md"></span>
+                  ) : (
+                    "Register"
+                  )}{" "}
+                </button>
               </div>
             </form>
           </div>

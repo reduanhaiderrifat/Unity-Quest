@@ -52,8 +52,8 @@ const BeVolunteer = () => {
     const status = form.status.value;
     const description = form.description.value;
     const number = form.number.value;
-    const Organaization_name = form.Organaization_name.value;
-    const organizer_email = form.organizer_email.value;
+    const username = form.username.value;
+    const useremail = form.useremail.value;
     const requestData = {
       title,
       thumbnail,
@@ -64,8 +64,8 @@ const BeVolunteer = () => {
       category,
       deadline,
       number,
-      Organaization_name,
-      organizer_email,
+      username,
+      useremail,
     };
     console.log(requestData);
     try {
@@ -243,12 +243,12 @@ const BeVolunteer = () => {
               <div className="form-control w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
-                    Organizer name
+                    Name
                   </span>
                 </label>
                 <input
                   type="text"
-                  name="Organaization_name"
+                  name="username"
                   placeholder="Organizer name"
                   className="input input-bordered  w-full cursor-no-drop"
                   value={Organaization_name}
@@ -259,12 +259,12 @@ const BeVolunteer = () => {
               <div className="form-control w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
-                    Organizer email
+                    Email
                   </span>
                 </label>
                 <input
                   type="email"
-                  name="organizer_email"
+                  name="useremail"
                   placeholder="organizer email "
                   className="input input-bordered w-full cursor-no-drop"
                   value={organizer_email}

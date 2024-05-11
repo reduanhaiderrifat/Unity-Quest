@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { FaGithub } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -8,8 +8,9 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { singInUser, googleUser, githubUser } = useAuth();
+  const { singInUser, googleUser, githubUser, loading } = useAuth();
   const navigate = useNavigate();
+  const [showPassowrd, setShowPassword] = useState(false);
   const location = useLocation();
   const {
     register,
@@ -29,7 +30,7 @@ const Login = () => {
         toast.success("User login successfully");
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   const handleGoogle = () => {
@@ -41,7 +42,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   const handleGithub = () => {
@@ -53,19 +54,30 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
+        toast.error(error?.message.split(":")[1]);
       });
   };
   return (
     <div>
       <div className="bg-[#00684A]">
         <div className="hero-content flex-col md:flex-row-reverse lg:flex-row-reverse">
-          <div className="w-2/3 hidden md:flex lg:flex xl:flex">
+          <div className="w-2/3 hidden  lg:flex xl:flex relative">
             <img
               className="w-full h-full"
               src="https://i.ibb.co/X4sY8KS/image.png"
               alt=""
             />
+            <div className="w-[35%] h-[60%] bg-[#00684A] absolute left-10 text-white">
+              <p>
+                Energistically utilize cross-platform information with
+                client-centric "outside the box" thinking. Proactively integrate
+                multifunctional niches for unique processes. Phosfluorescently
+                syndicate multifunctional e-services through goal-oriented
+                vortals. Conveniently provide access to frictionless materials
+                through business infomediaries. Phosfluorescently expedite
+                extensible sources without 24/365 platform.
+              </p>
+            </div>
           </div>
           <div className="card shrink-0 w-full  max-w-sm  bg-base-100">
             <div className="card-body">
@@ -108,25 +120,28 @@ const Login = () => {
                       required: "This field is required",
                     })}
                   />
-                  {errors.email && (
-                    <span className="text-red-500">{errors.email.message}</span>
-                  )}
                 </div>
               )}
               {step === 2 && (
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Password</span>
+                  <span className="label-text">Password</span>
+                  <label className="label relative">
+                    <input
+                      type={showPassowrd ? "text" : "password"}
+                      placeholder="password"
+                      name="password"
+                      className="input input-bordered w-full"
+                      {...register("password", {
+                        required: "This field is required",
+                      })}
+                    />{" "}
+                    <a
+                      className="absolute right-4"
+                      onClick={() => setShowPassword(!showPassowrd)}
+                    >
+                      {!showPassowrd ? <FaEyeSlash /> : <FaEye />}
+                    </a>
                   </label>
-                  <input
-                    type="password"
-                    placeholder="password"
-                    name="password"
-                    className="input input-bordered"
-                    {...register("password", {
-                      required: "This field is required",
-                    })}
-                  />
                   {errors.password && (
                     <span className="text-red-500">
                       {errors.password.message}
@@ -144,7 +159,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="btn btn-primary"
+                    className="btn  text-white text-lg font-semibold  bg-gradient-to-r from-green-500 to-green-800"
                   >
                     Next
                   </button>
@@ -157,8 +172,11 @@ const Login = () => {
                     >
                       <IoMdArrowRoundBack size={25} />
                     </button>
-                    <button type="submit" className="btn btn-primary">
-                      Login
+                    <button
+                      type="submit"
+                      className="btn text-white text-lg font-semibold  bg-gradient-to-r from-green-500 to-green-800"
+                    >
+                      {loading ? "loading..." : "Login"}
                     </button>
                   </>
                 )}

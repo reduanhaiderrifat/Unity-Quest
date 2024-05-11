@@ -32,7 +32,7 @@ const Update = () => {
       <span className="loading loading-spinner loading-lg"></span>
     </div>;
   }
-  const handlePost = async (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;
     const title = form.title.value;
@@ -76,7 +76,7 @@ const Update = () => {
   return (
     <div>
       <h2>this update page {id}</h2>
-      <form onSubmit={handlePost}>
+      <form onSubmit={handleUpdate}>
         <div className="flex items-center border p-4 bg-[#111827] gap-4">
           <div className="w-1/3 text-white font-semibold space-y-4">
             <h2 className="text-xl">Information for volunteers</h2>
@@ -148,7 +148,7 @@ const Update = () => {
                     defaultValue={singleData?.category}
                     required
                   >
-                    <option value="" disabled selected>
+                    <option value="" disabled>
                       choose one
                     </option>
                     <option value="Healthcare"> Healthcare</option>
@@ -201,10 +201,9 @@ const Update = () => {
                 </label>
 
                 <ReactDatePicker
-                  selected={deadline}
+                  selected={singleData?.deadline}
                   onChange={(date) => setDeadlineDate(date)}
                   className="input input-bordered w-full"
-                  defaultValue={singleData?.deadline}
                   required
                 />
               </div>

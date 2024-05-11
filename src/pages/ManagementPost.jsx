@@ -57,7 +57,7 @@ const ManagementPost = () => {
     }
   };
 
-  if (!posts || posts.length === 0) {
+  if (!posts || (posts.length === 0 && !loader)) {
     return (
       <div className="min-h-[calc(100vh-230px)] flex flex-col justify-center items-center gap-4">
         <h2 className=" text-5xl font-semibold">
@@ -75,11 +75,11 @@ const ManagementPost = () => {
       </div>
     );
   }
-  if (loader) {
-    <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
-      <span className="loading loading-spinner loading-lg"></span>
-    </div>;
-  }
+  // if (loader) {
+  //   <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
+  //     <span className="loading loading-spinner loading-lg"></span>
+  //   </div>;
+  // }
   return (
     <div>
       {loader ? (
@@ -120,7 +120,7 @@ const ManagementPost = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(post._id)}
-                        className="btn btn-primary"
+                        className="btn text-white bg-gradient-to-r from-red-500 to-orange-500"
                       >
                         Delete
                       </button>

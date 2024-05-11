@@ -24,7 +24,7 @@ const Navbar = () => {
           style={({ isActive, isTransiTion }) => {
             return {
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#fc9f27" : "",
+              color: isActive ? "#00684A" : "",
 
               viewTimelineName: isTransiTion ? "silder" : "",
             };
@@ -40,7 +40,7 @@ const Navbar = () => {
           style={({ isActive, isTransiTion }) => {
             return {
               fontWeight: isActive ? "bold" : "",
-              color: isActive ? "#fc9f27" : "",
+              color: isActive ? "#00684A" : "",
 
               viewTimelineName: isTransiTion ? "silder" : "",
             };
@@ -51,22 +51,20 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <div className="dropdown dropdown-right md:dropdown-right lg:dropdown-left  dropdown-hover">
-          <div tabIndex={0} role="button" className=" m-1">
-            <p className=" font-bold flex items-center gap-2">
-              My Profile <IoIosArrowDown />
-            </p>
+        <div className="dropdown dropdown-hover ">
+          <div tabIndex={0} className="m-1 flex items-center gap-2 font-bold">
+            My Profile <IoIosArrowDown />
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-50 space-y-2 font-bold menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
               <NavLink
                 style={({ isActive, isTransiTion }) => {
                   return {
-                    fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "#fc9f27" : "",
+                    fontWeight: isActive ? "bold" : "bold",
+                    color: isActive ? "#00684A" : "",
 
                     viewTimelineName: isTransiTion ? "silder" : "",
                   };
@@ -80,8 +78,8 @@ const Navbar = () => {
               <NavLink
                 style={({ isActive, isTransiTion }) => {
                   return {
-                    fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "#fc9f27" : "",
+                    fontWeight: isActive ? "bold" : "bold",
+                    color: isActive ? "#00684A" : "",
 
                     viewTimelineName: isTransiTion ? "silder" : "",
                   };
@@ -95,8 +93,8 @@ const Navbar = () => {
               <NavLink
                 style={({ isActive, isTransiTion }) => {
                   return {
-                    fontWeight: isActive ? "bold" : "",
-                    color: isActive ? "#fc9f27" : "",
+                    fontWeight: isActive ? "bold" : "bold",
+                    color: isActive ? "#00684A" : "",
 
                     viewTimelineName: isTransiTion ? "silder" : "",
                   };
@@ -251,78 +249,110 @@ const Navbar = () => {
             {loading ? (
               <span className="loading loading-spinner loading-md mr-3"></span>
             ) : user ? (
-              <div className="dropdown dropdown-hover dropdown-left ">
-                <div tabIndex={0} role="button" className=" m-1">
-                  <img
-                    className="w-10 h-10 rounded-full "
-                    src={
-                      user.photoURL ||
-                      "https://i.ibb.co/R3SSpJQ/145856997-296fe121-5dfa-43f4-98b5-db50019738a7.jpg"
-                    }
-                    alt=""
-                  />
-                </div>
-                <div
-                  tabIndex={0}
-                  className="dropdown-content z-50 card card-compact w-64 p-2 shadow-lg bg-white text-primary-content"
-                >
-                  <div className="hidden md:block lg:block text-end">
-                    <details className="dropdown ">
-                      <summary className="m-1 btn">
-                        <div
-                          className="tooltip tooltip-left"
-                          data-tip="update profile!"
-                        >
-                          <FaEdit size={25} />
-                        </div>
-                      </summary>
-
-                      <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-72">
-                        <form onSubmit={handleUpdateProfile}>
-                          <label className="input input-bordered mb-4 flex text-secondary items-center gap-2">
-                            <FaUser></FaUser>
-
-                            <input
-                              type="text"
-                              name="username"
-                              className="grow text-secondary"
-                              placeholder="Username"
-                            />
-                          </label>
-                          <label className="input input-bordered mb-4 flex text-secondary items-center gap-2">
-                            <FaPhotoVideo size={20} />
-                            <input
-                              type="text"
-                              name="photo"
-                              className="grow text-secondary"
-                              placeholder="Photo_URL"
-                            />
-                          </label>
-                          <label>
-                            <button className="btn w-full  hover:text-black text-white bg-[#fca027e5] hover:bg-green-500 font-bold">
-                              Update
-                            </button>
-                          </label>
-                        </form>
-                      </ul>
-                    </details>
-                  </div>
-                  <div className="card-body">
+              <div className="flex items-center gap-2">
+                <div className="dropdown dropdown-hover dropdown-left ">
+                  <div tabIndex={0} role="button" className=" m-1">
                     <img
-                      className="w-32 h-32 rounded-full text-center mx-auto"
+                      className="w-10 h-10 rounded-full "
                       src={
                         user.photoURL ||
                         "https://i.ibb.co/R3SSpJQ/145856997-296fe121-5dfa-43f4-98b5-db50019738a7.jpg"
                       }
                       alt=""
                     />
-                    <h3 className="card-title text-black">
-                      {user.displayName}
-                    </h3>
-                    <p className=" text-black">{user.email}</p>
                   </div>
-                  <button onClick={handleLogout} className=" btn">
-                    <FiLogOut size={25} /> Logout
+                  <div
+                    tabIndex={0}
+                    className="dropdown-content z-50 card card-compact w-64 p-2 shadow-lg bg-white text-primary-content"
+                  >
+                    <div className="hidden md:block lg:block text-end">
+                      <details className="dropdown ">
+                        <summary className="m-1 btn">
+                          <div
+                            className="tooltip tooltip-left"
+                            data-tip="update profile!"
+                          >
+                            <FaEdit size={25} />
+                          </div>
+                        </summary>
+
+                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-72">
+                          <form onSubmit={handleUpdateProfile}>
+                            <label className="input input-bordered mb-4 flex text-secondary items-center gap-2">
+                              <FaUser></FaUser>
+
+                              <input
+                                type="text"
+                                name="username"
+                                className="grow text-secondary"
+                                placeholder="Username"
+                              />
+                            </label>
+                            <label className="input input-bordered mb-4 flex text-secondary items-center gap-2">
+                              <FaPhotoVideo size={20} />
+                              <input
+                                type="text"
+                                name="photo"
+                                className="grow text-secondary"
+                                placeholder="Photo_URL"
+                              />
+                            </label>
+                            <label>
+                              <button className="btn w-full  hover:text-black text-white bg-[#fca027e5] hover:bg-green-500 font-bold">
+                                Update
+                              </button>
+                            </label>
+                          </form>
+                        </ul>
+                      </details>
+                    </div>
+                    <div className="card-body">
+                      <img
+                        className="w-32 h-32 rounded-full text-center mx-auto"
+                        src={
+                          user.photoURL ||
+                          "https://i.ibb.co/R3SSpJQ/145856997-296fe121-5dfa-43f4-98b5-db50019738a7.jpg"
+                        }
+                        alt=""
+                      />
+                      <h3 className="card-title text-black">
+                        {user.displayName}
+                      </h3>
+                      <p className=" text-black">{user.email}</p>
+                    </div>
+                    <button onClick={handleLogout} className=" btn">
+                      <FiLogOut size={25} /> Logout
+                    </button>
+                  </div>
+                </div>
+                <div className="dropdown md:hidden lg:hidden dropdown-hover dropdown-left dropdown-bottom">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="hover:bg-base-200 rounded-lg p-3 m-1"
+                  >
+                    <BsThreeDotsVertical />
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <div className=" flex flex-col ">
+                      <button
+                        onClick={handleLogout}
+                        className=" btn text-[#00684A] bg-transparent border-[#00684A] hover:text-white hover:bg-[#00684A]"
+                      >
+                        <FiLogOut size={20} /> Logout
+                      </button>
+                    </div>
+                  </ul>
+                </div>
+                <div className="hidden md:flex lg:flex xl:flex">
+                  <button
+                    onClick={handleLogout}
+                    className=" btn text-[#00684A] bg-transparent border-[#00684A] hover:text-white hover:bg-[#00684A]"
+                  >
+                    <FiLogOut size={20} /> Logout
                   </button>
                 </div>
               </div>
@@ -340,35 +370,23 @@ const Navbar = () => {
                     tabIndex={0}
                     className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52"
                   >
-                    <div className=" flex flex-col gap-2">
+                    <div className=" flex flex-col ">
                       <Link
                         to="/login"
-                        className="btn text-[#fc9f27] bg-transparent border-[#fc9f27] hover:text-white hover:bg-[#fc6a27]"
+                        className="btn text-[#00684A] bg-transparent border-[#00684A] hover:text-white hover:bg-[#00684A]"
                       >
                         Login
-                      </Link>
-                      <Link
-                        to="/register"
-                        className="btn  text-white hover:text-[#fc9f27] bg-[#fca027e5] hover:border-[#fc9f27] hover:bg-[transparent]"
-                      >
-                        Register
                       </Link>
                     </div>
                   </ul>
                 </div>
 
-                <div className="hidden md:flex lg:flex space-x-2">
+                <div className="hidden md:flex lg:flex ">
                   <Link
                     to="/login"
-                    className="btn text-[#fc9f27] bg-transparent border-[#fc9f27] hover:text-white hover:bg-[#fc6a27]"
+                    className="btn text-[#00684A] bg-transparent border-[#00684A] hover:text-white hover:bg-[#00684A]"
                   >
                     Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="btn text-white hover:text-[#fc9f27] bg-[#fca027e5] hover:border-[#fc9f27] hover:bg-[transparent]"
-                  >
-                    Register
                   </Link>
                 </div>
               </>
