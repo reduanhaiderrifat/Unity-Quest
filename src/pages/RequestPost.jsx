@@ -2,12 +2,18 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
 
 const RequestPost = () => {
   const [posts, setPosts] = useState();
   console.log(posts);
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
+  const Allposts = useLoaderData();
+
+  const find = Allposts.find((post) => post.number);
+  const number = find.number;
+
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get(
@@ -52,6 +58,19 @@ const RequestPost = () => {
       } catch (error) {
         console.error("Error deleting post:", error);
       }
+    }
+  };
+  ///updatenumber
+  const handleUpdateNumber = async (id) => {
+    console.log(id);
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
+        number
+      );
+      console.log(data);
+    } catch (error) {
+      console.error("Error deleting post:", error);
     }
   };
   if (!posts || posts.length === 0) {
@@ -99,7 +118,10 @@ const RequestPost = () => {
                     <td>{post.number}</td>
                     <td>
                       <button
-                        onClick={() => handleDelete(post._id)}
+                        onClick={() => {
+                          handleDelete(post._id);
+                          handleUpdateNumber(post?.id);
+                        }}
                         className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
                       >
                         Cancel

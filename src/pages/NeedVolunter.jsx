@@ -57,8 +57,21 @@ const NeedVolunter = () => {
     document.body.removeChild(textarea);
     toast.success("Text copied to clipboard!");
   };
+  if (posts.length === 0) {
+    return (
+      <div className="min-h-[calc(100vh-230px)] flex flex-col justify-center items-center">
+        <h2 className=" text-5xl font-semibold">
+          <i>OOPS!!!</i>
+        </h2>
+        <p className=" text-3xl font-semibold">
+          <i>NO DATA AVAILABLE</i>
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-[calc(100vh-230px)]">
+    <div className="min-h-[calc(100vh-230px)] bg-base-300">
       <div className="flex justify-center w-full ">
         <div className="border-2 p-2 rounded-full w-full md:w-2/3 lg:w-1/3">
           <form onSubmit={(e) => handleSearch(e)}>

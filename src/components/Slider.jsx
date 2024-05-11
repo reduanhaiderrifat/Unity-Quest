@@ -25,17 +25,22 @@ const Slider = () => {
           <div className=" relative">
             <img
               className="flex h-[400px] md:h-[600px] lg:h-[750px] xl:h-[750px] w-full  justify-center opacity-80"
-              src="https://i.ibb.co/GJR3gpM/slider1.jpg"
+              src="https://i.ibb.co/HNw1CdH/flood.jpg"
               alt=""
             />
-            <div className=" absolute top-[8%] lg:top-[30%] mx-[20%]">
-              <p className=" text-white font-semibold text-xl md:text-2xl lg:text-3xl xl:text-4xl hover:text-black">
-                Healthcare in Gaza faces significant challenges due to limited
-                resources and strained infrastructure. With a population of
-                nearly 2 million people, communal tensions and economic
-                downturns further exacerbate the situation. Collaborative
-                efforts, often relying on public funding and international aid,
-                aim to address these pressing healthcare needs.
+            <div className=" absolute top-[20%] lg:top-[30%] mx-[20%]">
+              <h2 className="text-2xl text-white lg:text-5xl hover:text-black">
+                Building Hope: Mobilizing Volunteers for Flood Relief in
+                Bangladesh
+              </h2>
+              <p className=" text-white font-semibold text-sm md:text-lg lg:text-xl xl:text-2xl hover:text-black">
+                Volunteer for Bangladesh (VBD), the youth wing of JAAGO
+                Foundation, has come forward and stood beside them with the
+                support of the volunteers in Gaibandha district. They have
+                distributed various essential items including dry food among the
+                villagers. They also provided them with the necessary
+                information to combat floods and how they should seek emergency
+                support.
               </p>
             </div>
           </div>
@@ -47,16 +52,15 @@ const Slider = () => {
               src="https://i.ibb.co/mbsD8mx/slider2.jpg"
               alt=""
             />
-            <div className=" absolute top-[8%] lg:top-[30%] mx-[20%]">
-              <p className=" text-white font-semibold text-xl md:text-2xl lg:text-3xl xl:text-4xl hover:text-black">
-                Donating to support healthcare in Gaza is crucial for addressing
-                urgent medical needs in the region. With limited resources and
-                strained infrastructure, the population of nearly 2 million
-                people faces significant challenges accessing essential
-                healthcare services. Your donation can make a meaningful
-                difference by providing medical supplies, equipment, and support
-                for healthcare facilities, helping to save lives and improve the
-                well-being of those in need.
+            <div className=" absolute top-[20%] lg:top-[30%] mx-[20%] space-y-4">
+              <h2 className="text-2xl text-white lg:text-5xl hover:text-black">
+                Your YES makes all the difference!
+              </h2>
+              <p className=" text-white font-semibold text-sm md:text-lg lg:text-xl xl:text-2xl hover:text-black">
+                When you say yes to these children, you say yes to their
+                futures. God has big plans for the thousands of children we
+                serve, and He wants to use YOU to help make those plans possible
+                Will you give a gift and change a life?
               </p>
             </div>
           </div>
@@ -68,39 +72,29 @@ const Slider = () => {
               src="https://i.ibb.co/NtZ3rTF/slider3.jpg"
               alt=""
             />
-            <div className=" absolute top-[8%] lg:top-[30%] mx-[20%]">
-              <p className=" text-white text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold hover:text-black">
-                Animal care involves ensuring the well-being and welfare of
-                animals through proper nutrition, shelter, healthcare, and
-                companionship. This includes providing a safe and clean
-                environment, regular veterinary check-ups, appropriate exercise,
-                and social interaction. Animal care also encompasses responsible
-                ownership practices, such as spaying and neutering, vaccination,
-                and training, to promote the health and happiness of pets and
-                other animals.
+            <div className=" absolute top-[20%] lg:top-[30%] mx-[20%]">
+              <h2 className="text-2xl text-white lg:text-5xl hover:text-black">
+                Wildlife & Animal Care Volunteer Abroad Programs
+              </h2>
+              <p className=" text-white font-semibold text-sm md:text-lg lg:text-xl xl:text-2xl hover:text-black">
+                Do you want to volunteer with animals abroad or play a pivotal
+                role in preserving wildlife around the world? International
+                Volunteer HQ’s Wildlife volunteer opportunities and Animal Care
+                programs allow volunteers to support local initiatives that
+                protect endangered species, preserve their natural environment
+                and help improve the quality of life for abandoned or rescued
+                animals.
               </p>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="relative">
+          <div className="">
             <img
               className="flex  h-[400px] md:h-[600px] lg:h-[750px] xl:h-[750px] w-full justify-center opacity-80"
-              src="https://i.ibb.co/g4CzxN2/slider4.jpg"
+              src="https://i.ibb.co/Rj9Nh9K/boold.jpg"
               alt=""
             />
-            <div className=" absolute top-[8%] lg:top-[30%] mx-[20%]">
-              <p className=" text-white text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold hover:text-black">
-                Social volunteering involves dedicating one's time and efforts
-                to serve and support various social causes and community
-                initiatives without financial compensation. Volunteers engage in
-                activities such as assisting vulnerable populations, organizing
-                events, fundraising, advocacy, and providing support to
-                individuals or groups in need. Social volunteers play a crucial
-                role in fostering positive change, promoting social cohesion,
-                and making a meaningful impact on society.
-              </p>
-            </div>
           </div>
         </SwiperSlide>
       </Swiper>

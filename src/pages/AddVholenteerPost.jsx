@@ -11,7 +11,7 @@ const AddVholenteerPost = () => {
   const handlePost = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const title = form.title.value;
+    const title = form.title.value.trim();
     const thumbnail = form.thumbnail.value;
     const location = form.location.value;
     const category = form.category.value;
@@ -163,17 +163,18 @@ const AddVholenteerPost = () => {
                   required
                 />
               </div>{" "}
-              <div className="form-control w-3/5">
+              <div className="form-control w-3/5 ">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Deadline
                   </span>
                 </label>
-
                 <ReactDatePicker
+                  toggleCalendarOnIconClick
                   selected={deadline}
                   onChange={(date) => setDeadlineDate(date)}
                   className="input input-bordered w-full"
+                  showIcon
                 />
               </div>
             </div>

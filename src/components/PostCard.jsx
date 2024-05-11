@@ -15,7 +15,7 @@ const PostCard = ({ post }) => {
               {category}
             </h5>
             <div className="tooltip tooltip-bottom" data-tip="Deadline">
-              <button className="">
+              <button className="text-black text-lg">
                 <p>{deadline.split("T")[0]}</p>
               </button>
             </div>

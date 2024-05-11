@@ -46,7 +46,7 @@ const OwnRequest = ({ number }) => {
             text: "Your Request has been deleted.",
             icon: "success",
           });
-          const remaining = posts.filter((post) => post._id !== id);
+          const remaining = posts?.filter((post) => post._id !== id);
           setPosts(remaining);
         }
       } catch (error) {
@@ -54,7 +54,7 @@ const OwnRequest = ({ number }) => {
       }
     }
   };
-  ///updatenumber  requestUpdateIncrese
+  ///updatenumber
   const handleUpdateNumber = async (id) => {
     console.log(id);
     try {
@@ -103,18 +103,18 @@ const OwnRequest = ({ number }) => {
               <tbody>
                 {/* row 1 */}
                 {posts.map((post, idx) => (
-                  <tr key={post._id}>
+                  <tr key={post?._id}>
                     <th>{idx + 1}</th>
                     <td>{post.category}</td>
 
-                    <td>{post.title}</td>
-                    <td>{post.location}</td>
-                    <td>{post.number}</td>
+                    <td>{post?.title}</td>
+                    <td>{post?.location}</td>
+                    <td>{post?.number}</td>
                     <td>
                       <button
                         onClick={() => {
-                          handleDelete(post._id);
-                          handleUpdateNumber(post.id);
+                          handleDelete(post?._id);
+                          handleUpdateNumber(post?.id);
                         }}
                         className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
                       >
