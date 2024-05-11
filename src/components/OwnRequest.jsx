@@ -3,9 +3,9 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const OwnRequest = () => {
+const OwnRequest = ({ number }) => {
   const [posts, setPosts] = useState();
-  console.log(posts);
+  // console.log(posts);
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
   useEffect(() => {
@@ -54,6 +54,19 @@ const OwnRequest = () => {
       }
     }
   };
+  ///updatenumber  requestUpdateIncrese
+  const handleUpdateNumber = async (id) => {
+    console.log(id);
+    try {
+      const { data } = await axios.patch(
+        `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
+        number
+      );
+      console.log(data);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
+  };
   if (!posts || posts.length === 0) {
     return (
       <div className="min-h-[calc(100vh-230px)] flex flex-col justify-center items-center gap-4">
@@ -99,7 +112,10 @@ const OwnRequest = () => {
                     <td>{post.number}</td>
                     <td>
                       <button
-                        onClick={() => handleDelete(post._id)}
+                        onClick={() => {
+                          handleDelete(post._id);
+                          handleUpdateNumber(post.id);
+                        }}
                         className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
                       >
                         Cancel

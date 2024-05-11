@@ -66,6 +66,7 @@ const BeVolunteer = () => {
       number,
       username,
       useremail,
+      id,
     };
     console.log(requestData);
     try {
@@ -81,10 +82,10 @@ const BeVolunteer = () => {
           icon: "success",
         });
       }
-      //update nimper ou
+      //update number of volunteer
       const reesponse = await axios.patch(
         `${import.meta.env.VITE_URL_SERVER}/requestUpdate/${id}`,
-        number, // Send the entire requestData object
+        number,
         { withCredentials: true }
       );
       console.log(reesponse.data);
