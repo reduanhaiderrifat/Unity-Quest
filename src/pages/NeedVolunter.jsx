@@ -5,12 +5,14 @@ import { RiLayoutGrid2Fill } from "react-icons/ri";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import PostCard from "../components/PostCard";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { FcSearch } from "react-icons/fc";
+import toast from "react-hot-toast";
+import { FaAnglesDown } from "react-icons/fa6";
 const NeedVolunter = () => {
+  const titles = useLoaderData();
   const [posts, setAllPost] = useState([]);
   const [loader, setLoader] = useState(true);
-  // const [searchQuery, setSearchQuery] = useState("");
   console.log(posts);
   useEffect(() => {
     const getData = async () => {
@@ -25,25 +27,80 @@ const NeedVolunter = () => {
     };
     getData();
   }, []);
-
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+    console.log(search);
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_URL_SERVER}/titlePost/${search}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (data.length === 0) {
+        toast.error("No matching titles found.");
+      } else {
+        setAllPost(data);
+        setLoader(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const copyText = (text) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    toast.success("Text copied to clipboard!");
+  };
   return (
     <div className="min-h-[calc(100vh-230px)]">
       <div className="flex justify-center w-full ">
-        <div className="border-2 p-2 rounded-full w-1/3">
-          <label className="flex items-center">
-            <input
-              className=" rounded-full w-full"
-              type="text"
-              name=""
-              placeholder="search by post title..."
-            />
-            <button className="button">
-              <FcSearch size={45} />
-            </button>
-          </label>
+        <div className="border-2 p-2 rounded-full w-full md:w-2/3 lg:w-1/3">
+          <form onSubmit={(e) => handleSearch(e)}>
+            <label className="flex items-center">
+              <input
+                className=" rounded-full w-full"
+                type="text"
+                name="search"
+                placeholder="search by post title..."
+              />
+              <button className="button">
+                <FcSearch size={45} />
+              </button>
+            </label>
+          </form>
         </div>
       </div>
-
+      <div className="w-full ">
+        <div className="dropdown w-full ">
+          <div tabIndex={0} className="m-1 btn">
+            Title clue for search <FaAnglesDown />
+          </div>
+          <ul
+            tabIndex={0}
+            className="p-2 shadow-md overflow-y-scroll h-96 menu dropdown-content z-50 bg-white rounded-md w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+          >
+            {titles?.map((post) => (
+              <li key={post._id} className="mb-3 border-b-2 border-gray-200">
+                <div className="flex items-center justify-between">
+                  <span className="text-base">{post.title}</span>
+                  <button
+                    onClick={() => copyText(post.title)}
+                    className="ml-2 px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <Tabs>
         <div className="flex justify-end ">
           <TabList>

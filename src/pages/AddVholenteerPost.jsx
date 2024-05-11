@@ -16,7 +16,7 @@ const AddVholenteerPost = () => {
     const location = form.location.value;
     const category = form.category.value;
     const description = form.description.value;
-    const number = form.number.value;
+    const number = parseInt(form.number.value);
     const Organaization_name = form.Organaization_name.value;
     const organizer_email = form.organizer_email.value;
     const postData = {

@@ -82,12 +82,12 @@ const BeVolunteer = () => {
         });
       }
       //update nimper ou
-      // const reesponse = await axios.patch(
-      //   `${import.meta.env.VITE_URL_SERVER}/requestUpdate/${id}`,
-      //   number, // Send the entire requestData object
-      //   { withCredentials: true }
-      // );
-      // console.log(reesponse.data);
+      const reesponse = await axios.patch(
+        `${import.meta.env.VITE_URL_SERVER}/requestUpdate/${id}`,
+        number, // Send the entire requestData object
+        { withCredentials: true }
+      );
+      console.log(reesponse.data);
     } catch (error) {
       console.error(error);
     }
