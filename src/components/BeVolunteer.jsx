@@ -51,7 +51,7 @@ const BeVolunteer = () => {
     const suggestion = form.suggestion.value;
     const status = form.status.value;
     const description = form.description.value;
-    const number = form.number.value;
+    const number = parseInt(form.number.value);
     const username = form.username.value;
     const useremail = form.useremail.value;
     const requestData = {
@@ -81,8 +81,13 @@ const BeVolunteer = () => {
           icon: "success",
         });
       }
-      console.log(response.data);
-      form.reset();
+      //update nimper ou
+      // const reesponse = await axios.patch(
+      //   `${import.meta.env.VITE_URL_SERVER}/requestUpdate/${id}`,
+      //   number, // Send the entire requestData object
+      //   { withCredentials: true }
+      // );
+      // console.log(reesponse.data);
     } catch (error) {
       console.error(error);
     }

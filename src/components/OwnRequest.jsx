@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const RequestPost = () => {
+const OwnRequest = () => {
   const [posts, setPosts] = useState();
   console.log(posts);
   const [loader, sestLoading] = useState(true);
@@ -116,4 +116,4 @@ const RequestPost = () => {
   );
 };
 
-export default RequestPost;
+export default OwnRequest;

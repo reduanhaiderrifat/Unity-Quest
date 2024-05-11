@@ -21,7 +21,7 @@ const PostCard = ({ post }) => {
             </div>
           </div>
           <p className="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">
-            {title}
+            <strong> Title</strong> : {title}
           </p>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 flex items-center gap-3">
             <span className=" font-bold  text-xl"> Location:</span>
