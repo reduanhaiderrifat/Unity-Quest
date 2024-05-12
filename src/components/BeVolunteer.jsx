@@ -7,6 +7,7 @@ const BeVolunteer = () => {
   const [loader, sestLoading] = useState(true);
 
   const { id } = useParams();
+  console.log(id);
   const {
     title,
     thumbnail,

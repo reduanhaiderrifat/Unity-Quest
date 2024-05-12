@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
+import axios from "axios";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -44,7 +45,24 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
-
+      const loggedUser = { email: currentuser?.email };
+      if (currentuser) {
+        axios
+          .post(`${import.meta.env.VITE_URL_SERVER}/jwt`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("tokenresponse", res.data);
+          });
+      } else {
+        axios
+          .post(`${import.meta.env.VITE_URL_SERVER}/logout`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log(res.data);
+          });
+      }
       setLoading(false);
     });
     return () => unsuscribe();

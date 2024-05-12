@@ -9,7 +9,7 @@ const Update = () => {
   const { id } = useParams();
   const [singleData, setSingleData] = useState();
   const [loader, sestLoading] = useState(true);
-  const [deadlinedata, setDeadlineDate] = useState(new Date());
+  const [deadline, setDeadlineDate] = useState(new Date());
   const { user } = useAuth();
 
   useEffect(() => {
@@ -22,10 +22,6 @@ const Update = () => {
       );
       setSingleData(data);
       sestLoading(false);
-      if (data && data.deadline) {
-        const deadline = new Date(data.deadline);
-        setDeadlineDate(deadline);
-      }
     };
 
     getData();
@@ -42,7 +38,6 @@ const Update = () => {
     const thumbnail = form.thumbnail.value;
     const location = form.location.value;
     const category = form.category.value;
-    const deadline = form.deadline.value;
     const description = form.description.value;
     const number = form.number.value;
     const Organaization_name = form.Organaization_name.value;
@@ -204,8 +199,9 @@ const Update = () => {
                 </label>
 
                 <ReactDatePicker
-                  selected={deadlinedata}
+                  selected={deadline}
                   name="deadline"
+                  dateFormat="dd/MM/yyyy"
                   onChange={(date) => setDeadlineDate(date)}
                   className="input input-bordered w-full"
                   showIcon

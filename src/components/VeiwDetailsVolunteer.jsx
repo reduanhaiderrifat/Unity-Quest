@@ -109,11 +109,11 @@ const VeiwDetailsVolunteer = () => {
               <h3 className="text-xl font-medium text-blue-500 mb-3">
                 {category}
               </h3>
-              <p className="mb-1 flex items-center">
-                <IoMdLocate /> Location : {location}
+              <p className="mb-1 flex items-center gap-2">
+                <IoMdLocate /> <strong>Location</strong> : {location}
               </p>
               <p className="flex items-center gap-2">
-                <FaUsers /> Number of Volunteers : {number}
+                <FaUsers /> <strong>Number of Volunteers</strong> : {number}
               </p>
               <h2 className="mb-1 text-xl font-semibold mt-3">{title}</h2>
               <p className="text-sm dark:text-gray-600 mt-3">

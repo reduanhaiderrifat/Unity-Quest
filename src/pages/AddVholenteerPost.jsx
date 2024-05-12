@@ -174,6 +174,7 @@ const AddVholenteerPost = () => {
                 <ReactDatePicker
                   toggleCalendarOnIconClick
                   selected={deadline}
+                  dateFormat="dd/MM/yyyy"
                   onChange={(date) => setDeadlineDate(date)}
                   className="input input-bordered w-full"
                   showIcon

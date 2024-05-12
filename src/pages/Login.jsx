@@ -37,7 +37,7 @@ const Login = () => {
     googleUser()
       .then((result) => {
         console.log(result.user);
-        navigate(location?.state ? location.state : "/");
+        // navigate(location?.state ? location.state : "/");
         toast.success("User login with google successfully");
       })
       .catch((error) => {
@@ -68,14 +68,13 @@ const Login = () => {
               alt=""
             />
             <div className="w-[35%] h-[60%] bg-[#00684A] absolute left-10 text-white">
-              <p>
-                Energistically utilize cross-platform information with
-                client-centric "outside the box" thinking. Proactively integrate
-                multifunctional niches for unique processes. Phosfluorescently
-                syndicate multifunctional e-services through goal-oriented
-                vortals. Conveniently provide access to frictionless materials
-                through business infomediaries. Phosfluorescently expedite
-                extensible sources without 24/365 platform.
+              <p className="mt-16 leading-8 text-md font-semibold">
+                Volunteering offers individuals a profound sense of purpose and
+                fulfillment by allowing them to contribute their skills to
+                causes they care about. Additionally, it plays a vital role in
+                creating positive social change by amplifying the impact of
+                organizations and fostering empathy and understanding within
+                communities.
               </p>
             </div>
           </div>

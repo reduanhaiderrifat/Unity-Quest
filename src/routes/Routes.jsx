@@ -52,7 +52,6 @@ const router = createBrowserRouter([
             <ManagementPost />
           </PriviteRoute>
         ),
-        loader: () => fetch(`${import.meta.env.VITE_URL_SERVER}/allPost`),
       },
       {
         path: "/requestPost",
@@ -61,7 +60,6 @@ const router = createBrowserRouter([
             <RequestPost />
           </PriviteRoute>
         ),
-        loader: () => fetch(`${import.meta.env.VITE_URL_SERVER}/allPost`),
       },
       {
         path: "/volunteerDetails/:id",

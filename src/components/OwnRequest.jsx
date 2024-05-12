@@ -3,9 +3,9 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const OwnRequest = ({ number }) => {
+const OwnRequest = () => {
   const [posts, setPosts] = useState();
-  // console.log(posts);
+
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
   useEffect(() => {
@@ -23,7 +23,7 @@ const OwnRequest = ({ number }) => {
     getData();
   }, [user]);
   //deelete
-  const handleDelete = async (_id, id) => {
+  const handleDelete = async (_id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -48,10 +48,6 @@ const OwnRequest = ({ number }) => {
           });
           const remaining = posts?.filter((post) => post._id !== _id);
           setPosts(remaining);
-          await axios.patch(
-            `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
-            number
-          );
         }
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -104,7 +100,7 @@ const OwnRequest = ({ number }) => {
                     <td>
                       <button
                         onClick={() => {
-                          handleDelete(post?._id, post?.id);
+                          handleDelete(post?._id);
                         }}
                         className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
                       >
