@@ -6,7 +6,7 @@ const PostCard = ({ post, idx }) => {
   const { thumbnail, title, deadline, category, location, _id } = post;
   return (
     <div className=" overflow-hidden">
-      <Fade direction={idx % 2 === 0 ? "up" : "left"}>
+      <Fade direction={idx % 2 === 0 ? "left" : "right"}>
         <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <a href="#">
             <img className="rounded-t-lg" src={thumbnail} alt="" />

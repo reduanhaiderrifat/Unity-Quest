@@ -76,7 +76,7 @@ const OwnPost = () => {
     );
   }
   return (
-    <div>
+    <div className="min-h-[calc(100vh-230px)]">
       <div>
         {loader ? (
           <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">

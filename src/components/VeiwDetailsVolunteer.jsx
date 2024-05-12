@@ -20,6 +20,7 @@ const VeiwDetailsVolunteer = () => {
     number,
     Organaization_name,
     organizer_email,
+    userImage,
   } = singleData;
   useEffect(() => {
     const getData = async () => {
@@ -45,66 +46,97 @@ const VeiwDetailsVolunteer = () => {
   console.log(singleData);
 
   return (
-    <div>
-      <div className="flex flex-col  p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
-        <div>
+    <div className=" flex justify-center">
+      <div className="">
+        <div className="hidden lg:flex">
           <img
+            className="w-full h-[500px]"
             src={thumbnail}
-            alt=""
-            className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500"
+            alt="comming soon..."
           />
-          <div className="flex justify-between mx-[12%]">
-            <div className="">
-              <h2 className="mb-1 text-xl font-semibold">{category}</h2>
-              <h1 className="mb-1 text-4xl font-bold">{title}</h1>
+        </div>
+        <div className="flex ">
+          <div className="flex flex-col md:max-w-3xl p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
+            <div className="flex justify-between">
+              <div className="flex space-x-4">
+                <div
+                  className="tooltip tooltip-right"
+                  data-tip="Organaization Photo"
+                >
+                  <button className="">
+                    <img
+                      alt="coming soon..."
+                      src={userImage}
+                      className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500"
+                    />
+                  </button>
+                </div>
+
+                <div className="flex flex-col space-y-1">
+                  <p
+                    rel="noopener noreferrer"
+                    href="#"
+                    className="text-md font-semibold"
+                  >
+                    <div
+                      className="tooltip tooltip-right"
+                      data-tip="Organaization Name"
+                    >
+                      <button className="">{Organaization_name}</button>
+                    </div>
+                  </p>
+                  <span className="text-md dark:text-gray-600">
+                    <div
+                      className="tooltip tooltip-right"
+                      data-tip="Organaization Email"
+                    >
+                      <button>{organizer_email}</button>
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <p>
+                <span className=" font-bold">Deadline</span> :
+                {deadline?.split("T")[0]}
+              </p>
             </div>
-            <p>
-              <span className=" font-bold">Deadline</span>:{" "}
-              {deadline?.split("T")[0]}
-            </p>
+            <div>
+              <img
+                src={thumbnail}
+                alt=""
+                className="object-cover w-full lg:hidden mb-4 h-60 sm:h-96 dark:bg-gray-500"
+              />
+              <h3 className="text-xl font-medium text-blue-500 mb-3">
+                {category}
+              </h3>
+              <p className="mb-1 flex items-center">
+                <IoMdLocate /> Location : {location}
+              </p>
+              <p className="flex items-center gap-2">
+                <FaUsers /> Number of Volunteers : {number}
+              </p>
+              <h2 className="mb-1 text-xl font-semibold mt-3">{title}</h2>
+              <p className="text-sm dark:text-gray-600 mt-3">
+                <strong>Description : </strong> {description}
+              </p>
+            </div>
+            <div className=" w-2/3 mx-auto">
+              <Link
+                to={`/bevolunteer/${_id}`}
+                className="btn  mt-8 w-full bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg"
+              >
+                Be Volunteer
+              </Link>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-around mt-12">
-            <div className="space-x-2">
-              <p className=" text-lg font-bold">
-                <span className="text-xl"> Organaization_Name </span> :{" "}
-                {Organaization_name}
-              </p>
-              <p className=" text-lg font-bold">
-                <span className="text-xl">Organaization_Email</span> :{" "}
-                {organizer_email}
-              </p>
-            </div>
-            <div className=" space-y-2 text-sm dark:text-gray-600">
-              <p className="flex items-center">
-                <span className=" text-lg font-bold">Location : </span>
-                <span className="flex items-center gap-2">
-                  <IoMdLocate size={25} />{" "}
-                  <span className="text-lg text-blue-500">{location}</span>
-                </span>
-              </p>
-              <p className="flex items-center">
-                {" "}
-                <span className=" text-lg font-bold">
-                  Number of Volunteers : {""}
-                </span>
-                <FaUsers size={25} />{" "}
-                <span className="ml-3 text-lg">{number}</span>
-              </p>
-            </div>
+          <div className="hidden  lg:flex justify-center items-center">
+            <img
+              src={thumbnail}
+              alt="soming soon..."
+              className="object-cover w-full mb-4   sm:h-96 dark:bg-gray-500"
+            />
           </div>
-          <div className=" flex justify-center mt-6">
-            <Link
-              to={`/bevolunteer/${_id}`}
-              className="btn w-1/3  bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg"
-            >
-              Be Volunteer
-            </Link>
-          </div>
-          <p className="text-lg dark:text-gray-600 mt-12">
-            <span className=" font-bold text-lg"> Description</span> :{" "}
-            {description}
-          </p>
         </div>
       </div>
     </div>

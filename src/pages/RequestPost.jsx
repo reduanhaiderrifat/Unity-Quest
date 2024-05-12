@@ -29,7 +29,7 @@ const RequestPost = () => {
     getData();
   }, [user]);
   //deelete
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id, id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -44,7 +44,7 @@ const RequestPost = () => {
     if (result.isConfirmed) {
       try {
         const { data } = await axios.delete(
-          `${import.meta.env.VITE_URL_SERVER}/requestDelete/${id}`
+          `${import.meta.env.VITE_URL_SERVER}/requestDelete/${_id}`
         );
         if (data.deletedCount > 0) {
           Swal.fire({
@@ -52,7 +52,7 @@ const RequestPost = () => {
             text: "Your Request has been deleted.",
             icon: "success",
           });
-          const remaining = posts.filter((post) => post._id !== id);
+          const remaining = posts.filter((post) => post._id !== _id);
           setPosts(remaining);
           await axios.patch(
             `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
