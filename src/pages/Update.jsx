@@ -9,7 +9,7 @@ const Update = () => {
   const { id } = useParams();
   const [singleData, setSingleData] = useState();
   const [loader, sestLoading] = useState(true);
-  const [deadline, setDeadlineDate] = useState(new Date());
+  const [deadline, setSelectedDate] = useState(new Date());
   const { user } = useAuth();
 
   useEffect(() => {
@@ -26,6 +26,12 @@ const Update = () => {
 
     getData();
   }, [id]);
+  useEffect(() => {
+    if (singleData) {
+      const fetchedDate = singleData.deadline;
+      setSelectedDate(new Date(fetchedDate));
+    }
+  }, [singleData]);
   if (loader) {
     <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
       <span className="loading loading-spinner loading-lg"></span>
@@ -201,8 +207,7 @@ const Update = () => {
                 <ReactDatePicker
                   selected={deadline}
                   name="deadline"
-                  dateFormat="dd/MM/yyyy"
-                  onChange={(date) => setDeadlineDate(date)}
+                  onChange={(date) => setSelectedDate(date)}
                   className="input input-bordered w-full"
                   showIcon
                   required

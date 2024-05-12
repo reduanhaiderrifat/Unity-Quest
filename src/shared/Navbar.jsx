@@ -51,7 +51,10 @@ const Navbar = () => {
       </li>
       <li>
         <div className="dropdown dropdown-hover ">
-          <div tabIndex={0} className="m-1 flex items-center gap-2 font-bold">
+          <div
+            tabIndex={0}
+            className="m-1 flex items-center gap-2 font-bold cursor-pointer"
+          >
             My Profile <IoIosArrowDown />
           </div>
           <ul

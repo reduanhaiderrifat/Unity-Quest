@@ -229,6 +229,7 @@ const BeVolunteer = () => {
                 cols="45"
                 rows="8"
                 className=" rounded-lg"
+                placeholder="text..."
               ></textarea>
             </div>
             <div className="">
