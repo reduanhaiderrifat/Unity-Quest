@@ -14,7 +14,6 @@ const Navbar = () => {
   const { user, loading, updateUser, logOut } = useAuth();
   const [theme, setTheme] = useState("light");
   const [open, setOpen] = useState(false);
-  //   const navigate = useNavigate();
 
   const links = (
     <>
@@ -176,8 +175,8 @@ const Navbar = () => {
                 </div>
               </div>
             </div>
-            <h1 className="  text-2xl nosifer-regular text-[#00684A]">
-              UnityQuest
+            <h1 className="  text-2xl nosifer-regular ">
+              Unity<span className="text-[#00684A]">Quest</span>
             </h1>
           </div>
           <div className="hidden lg:flex">

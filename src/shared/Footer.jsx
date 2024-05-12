@@ -21,7 +21,7 @@ const Footer = () => {
             <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600"></div>
             <span className="self-center nosifer-regular text-2xl font-semibold">
               <Typewriter
-                words={[" Artisan Alley"]}
+                words={["Unity Quest"]}
                 loop={500}
                 cursor
                 cursorStyle="."

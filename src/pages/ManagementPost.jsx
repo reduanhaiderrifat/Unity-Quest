@@ -6,8 +6,8 @@ import { useLoaderData } from "react-router-dom";
 const ManagementPost = () => {
   const posts = useLoaderData();
   console.log(posts);
-  const find = posts.find((post) => post.number);
-  const number = find.number;
+  const find = posts?.find((post) => post?.number);
+  const number = find?.number;
   console.log(number);
   return (
     <div>

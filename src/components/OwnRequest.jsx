@@ -48,23 +48,14 @@ const OwnRequest = ({ number }) => {
           });
           const remaining = posts?.filter((post) => post._id !== id);
           setPosts(remaining);
+          await axios.patch(
+            `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
+            number
+          );
         }
       } catch (error) {
         console.error("Error deleting post:", error);
       }
-    }
-  };
-  ///updatenumber
-  const handleUpdateNumber = async (id) => {
-    console.log(id);
-    try {
-      const { data } = await axios.patch(
-        `${import.meta.env.VITE_URL_SERVER}/requestUpdateIncrese/${id}`,
-        number
-      );
-      console.log(data);
-    } catch (error) {
-      console.error("Error deleting post:", error);
     }
   };
   if (!posts || posts.length === 0) {
@@ -96,25 +87,24 @@ const OwnRequest = ({ number }) => {
                   <th>Category</th>
                   <th>Post Title</th>
                   <th>Location</th>
-                  <th>Number of Volunteers</th>
+                  <th>Deadline</th>
                   <th>Request</th>
                 </tr>
               </thead>
               <tbody>
                 {/* row 1 */}
-                {posts.map((post, idx) => (
+                {posts?.map((post, idx) => (
                   <tr key={post?._id}>
                     <th>{idx + 1}</th>
                     <td>{post.category}</td>
 
                     <td>{post?.title}</td>
                     <td>{post?.location}</td>
-                    <td>{post?.number}</td>
+                    <td>{post?.deadline.split("T")[0]}</td>
                     <td>
                       <button
                         onClick={() => {
-                          handleDelete(post?._id);
-                          handleUpdateNumber(post?.id);
+                          handleDelete(post?._id, post?.id);
                         }}
                         className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
                       >

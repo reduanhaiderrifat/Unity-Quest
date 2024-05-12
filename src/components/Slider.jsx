@@ -17,7 +17,6 @@ const Slider = () => {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >

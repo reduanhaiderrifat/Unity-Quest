@@ -99,12 +99,12 @@ const OwnPost = () => {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  {posts.map((post, idx) => (
+                  {posts?.map((post, idx) => (
                     <tr key={post._id}>
                       <th>{idx + 1}</th>
-                      <td>{post.category}</td>
-                      <td>{post.title}</td>
-                      <td>{post.number}</td>
+                      <td>{post?.category}</td>
+                      <td>{post?.title}</td>
+                      <td>{post?.number}</td>
                       <td>
                         <Link
                           to={`/update/${post._id}`}

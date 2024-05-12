@@ -90,9 +90,12 @@ const NeedVolunter = () => {
         </div>
       </div>
       <div className="w-full ">
-        <div className="dropdown w-full ">
-          <div tabIndex={0} className="m-1 btn">
-            Title clue for search <FaAnglesDown />
+        <div className="dropdown w-full">
+          <div
+            tabIndex={0}
+            className="m-1 btn bg-blue-700 text-white hover:bg-blue-800"
+          >
+            Title's clue for search <FaAnglesDown />
           </div>
           <ul
             tabIndex={0}
@@ -142,8 +145,8 @@ const NeedVolunter = () => {
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 mt-8">
-                {posts.map((post) => (
-                  <PostCard key={post._id} post={post} />
+                {posts.map((post, idx) => (
+                  <PostCard key={post._id} idx={idx} post={post} />
                 ))}
               </div>
             </>
