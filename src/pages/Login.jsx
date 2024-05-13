@@ -8,17 +8,17 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { singInUser, googleUser, githubUser, loading } = useAuth();
+  const { singInUser, googleUser, githubUser, loading, setLoading } = useAuth();
   const navigate = useNavigate();
-  const [showPassowrd, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const [step, setStep] = useState(1);
+  const [emailValid, setEmailValid] = useState(false);
 
   const onSubmit = (data) => {
     const { email, password } = data;
@@ -31,20 +31,23 @@ const Login = () => {
       })
       .catch((error) => {
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
   const handleGoogle = () => {
     googleUser()
       .then((result) => {
         console.log(result.user);
-        // navigate(location?.state ? location.state : "/");
+        navigate(location?.state ? location.state : "/");
         toast.success("User login with google successfully");
       })
       .catch((error) => {
         console.log(error);
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
+
   const handleGithub = () => {
     githubUser()
       .then((result) => {
@@ -55,8 +58,20 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
+
+  const validateEmail = (email) => {
+    const regex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/;
+    return regex.test(email);
+  };
+
+  const handleChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmailValid(validateEmail(email));
+  };
+
   return (
     <div>
       <div className="bg-[#00684A]">
@@ -118,6 +133,7 @@ const Login = () => {
                     {...register("email", {
                       required: "This field is required",
                     })}
+                    onChange={handleChangeEmail}
                   />
                 </div>
               )}
@@ -126,7 +142,7 @@ const Login = () => {
                   <span className="label-text">Password</span>
                   <label className="label relative">
                     <input
-                      type={showPassowrd ? "text" : "password"}
+                      type={showPassword ? "text" : "password"}
                       placeholder="password"
                       name="password"
                       className="input input-bordered w-full"
@@ -136,9 +152,9 @@ const Login = () => {
                     />{" "}
                     <a
                       className="absolute right-4"
-                      onClick={() => setShowPassword(!showPassowrd)}
+                      onClick={() => setShowPassword(!showPassword)}
                     >
-                      {!showPassowrd ? <FaEyeSlash /> : <FaEye />}
+                      {!showPassword ? <FaEyeSlash /> : <FaEye />}
                     </a>
                   </label>
                   {errors.password && (
@@ -158,7 +174,10 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="btn  text-white text-lg font-semibold  bg-gradient-to-r from-green-500 to-green-800"
+                    disabled={!emailValid}
+                    className={`btn text-white text-lg font-semibold bg-gradient-to-r from-green-500 to-green-800 ${
+                      !emailValid ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
                   >
                     Next
                   </button>
@@ -173,9 +192,13 @@ const Login = () => {
                     </button>
                     <button
                       type="submit"
-                      className="btn text-white text-lg font-semibold  bg-gradient-to-r from-green-500 to-green-800"
+                      className="btn text-white text-lg font-semibold bg-gradient-to-r from-green-500 to-green-800"
                     >
-                      {loading ? "loading..." : "Login"}
+                      {loading ? (
+                        <span className="loading loading-spinner loading-md"></span>
+                      ) : (
+                        "Login"
+                      )}
                     </button>
                   </>
                 )}

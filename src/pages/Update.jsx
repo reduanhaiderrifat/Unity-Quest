@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Update = () => {
   const { id } = useParams();
@@ -11,21 +11,18 @@ const Update = () => {
   const [loader, sestLoading] = useState(true);
   const [deadline, setSelectedDate] = useState(new Date());
   const { user } = useAuth();
-
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/singlePost/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/singlePost/${id}`, {
+        withCredentials: true,
+      });
       setSingleData(data);
       sestLoading(false);
     };
 
     getData();
-  }, [id]);
+  }, [id, axiosSecure]);
   useEffect(() => {
     if (singleData) {
       const fetchedDate = singleData.deadline;
@@ -61,11 +58,7 @@ const Update = () => {
     };
     console.log(postData);
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_URL_SERVER}/update/${id}`,
-        postData,
-        { withCredentials: true }
-      );
+      const response = await axiosSecure.put(`/update/${id}`, postData);
       if (response.data.modifiedCount > 0) {
         Swal.fire({
           title: "Good job!",
@@ -73,7 +66,6 @@ const Update = () => {
           icon: "success",
         });
       }
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

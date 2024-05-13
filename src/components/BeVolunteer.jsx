@@ -1,11 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const BeVolunteer = () => {
   const [singleData, setSingleData] = useState({});
   const [loader, sestLoading] = useState(true);
-
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   console.log(id);
   const {
@@ -21,18 +21,13 @@ const BeVolunteer = () => {
   } = singleData;
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/singlePost/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/singlePost/${id}`);
       setSingleData(data);
       sestLoading(false);
     };
 
     getData();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   if (loader) {
     <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
@@ -71,25 +66,16 @@ const BeVolunteer = () => {
     };
     console.log(requestData);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_URL_SERVER}/request`,
-        requestData,
-        { withCredentials: true }
-      );
+      const response = await axiosSecure.post(`/request`, requestData);
       if (response.data.insertedId) {
         Swal.fire({
           title: "Good job!",
-          text: "Post successfully add!",
+          text: "Requset successfully sent!",
           icon: "success",
         });
       }
       //update number of volunteer
-      const reesponse = await axios.patch(
-        `${import.meta.env.VITE_URL_SERVER}/requestUpdate/${id}`,
-        number,
-        { withCredentials: true }
-      );
-      console.log(reesponse.data);
+      await axiosSecure.patch(`/requestUpdate/${id}`, number);
     } catch (error) {
       console.error(error);
     }

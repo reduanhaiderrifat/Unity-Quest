@@ -1,13 +1,13 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaUsers } from "react-icons/fa";
 import { IoMdLocate } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const VeiwDetailsVolunteer = () => {
   const [singleData, setSingleData] = useState({});
   const [loader, sestLoading] = useState(true);
-
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const {
     _id,
@@ -24,18 +24,13 @@ const VeiwDetailsVolunteer = () => {
   } = singleData;
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/singlePost/${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/singlePost/${id}`);
       setSingleData(data);
       sestLoading(false);
     };
 
     getData();
-  }, [id]);
+  }, [id, axiosSecure]);
 
   if (loader) {
     <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">

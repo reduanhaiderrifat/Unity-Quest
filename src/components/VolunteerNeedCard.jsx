@@ -1,25 +1,21 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const VolunteerNeedCard = () => {
   const [allposts, setAllPost] = useState([]);
   const [loader, setLoader] = useState(true);
+  const axiosSecure = useAxiosSecure();
   console.log(allposts);
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/sortPost`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/sortPost`);
       setAllPost(data);
       setLoader(false);
     };
     getData();
-  }, []);
+  }, [axiosSecure]);
   if (loader) {
     return (
       <div className="min-h-[calc(100vh-230px)] w-full flex justify-center border">

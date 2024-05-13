@@ -2,12 +2,13 @@ import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const AddVholenteerPost = () => {
   const [deadline, setDeadlineDate] = useState(new Date());
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const userImage = user?.photoURL;
   const handlePost = async (e) => {
     e.preventDefault();
@@ -34,11 +35,7 @@ const AddVholenteerPost = () => {
     };
     console.log(postData);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_URL_SERVER}/post`,
-        postData,
-        { withCredentials: true }
-      );
+      const response = await axiosSecure.post(`/post`, postData);
       if (response.data.insertedId) {
         Swal.fire({
           title: "Good job!",

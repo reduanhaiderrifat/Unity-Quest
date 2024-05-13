@@ -1,43 +1,33 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoTabletLandscape } from "react-icons/io5";
 import { RiLayoutGrid2Fill } from "react-icons/ri";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import PostCard from "../components/PostCard";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FcSearch } from "react-icons/fc";
 import toast from "react-hot-toast";
 import { FaAnglesDown } from "react-icons/fa6";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 const NeedVolunter = () => {
-  const titles = useLoaderData();
   const [posts, setAllPost] = useState([]);
   const [loader, setLoader] = useState(true);
   console.log(posts);
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/allPost`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/allPost`);
       setAllPost(data);
       setLoader(false);
     };
     getData();
-  }, []);
+  }, [axiosSecure]);
   const handleSearch = async (e) => {
     e.preventDefault();
     const search = e.target.search.value;
     console.log(search);
     try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/titlePost/${search}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/titlePost/${search}`);
       if (data.length === 0) {
         toast.error("No matching titles found.");
       } else {
@@ -101,7 +91,7 @@ const NeedVolunter = () => {
             tabIndex={0}
             className="p-2 shadow-md overflow-y-scroll h-96 menu dropdown-content z-50 bg-white rounded-md w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
           >
-            {titles?.map((post) => (
+            {posts?.map((post) => (
               <li key={post._id} className="mb-3 border-b-2 border-gray-200">
                 <div className="flex items-center justify-between">
                   <span className="text-base">{post.title}</span>

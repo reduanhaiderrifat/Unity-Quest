@@ -1,28 +1,24 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const OwnPost = () => {
   const [posts, setPosts] = useState();
   console.log(posts);
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_URL_SERVER}/posts/${user?.email}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axiosSecure.get(`/posts/${user?.email}`);
       setPosts(data);
       sestLoading(false);
     };
 
     getData();
-  }, [user]);
+  }, [user, axiosSecure]);
 
   //Delete
   const handleDelete = async (id) => {
@@ -39,9 +35,7 @@ const OwnPost = () => {
 
     if (result.isConfirmed) {
       try {
-        const { data } = await axios.delete(
-          `${import.meta.env.VITE_URL_SERVER}/delete/${id}`
-        );
+        const { data } = await axiosSecure.delete(`/delete/${id}`);
         if (data.deletedCount > 0) {
           Swal.fire({
             title: "Deleted!",

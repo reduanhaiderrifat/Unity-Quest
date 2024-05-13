@@ -10,28 +10,34 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [reloader, setReloader] = useState(false);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
   const googleUser = () => {
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
   const githubUser = () => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   };
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
   const singInUser = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
   const logOut = () => {
+    setLoading(true);
     return signOut(auth);
   };
   const updateUser = async (username, photo) => {
@@ -47,26 +53,14 @@ const AuthProvider = ({ children }) => {
       setUser(currentuser);
       const loggedUser = { email: currentuser?.email };
       if (currentuser) {
-        axios
-          .post(`${import.meta.env.VITE_URL_SERVER}/jwt`, loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log("tokenresponse", res.data);
-          });
+        axiosSecure.post(`/jwt`, loggedUser).then(() => {});
       } else {
-        axios
-          .post(`${import.meta.env.VITE_URL_SERVER}/logout`, loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log(res.data);
-          });
+        axiosSecure.post(`/logout`, loggedUser).then(() => {});
       }
       setLoading(false);
     });
     return () => unsuscribe();
-  }, [reloader]);
+  }, []);
   const authInfo = {
     createUser,
     singInUser,
@@ -74,6 +68,7 @@ const AuthProvider = ({ children }) => {
     githubUser,
     updateUser,
     logOut,
+    setLoading,
     loading,
     user,
   };

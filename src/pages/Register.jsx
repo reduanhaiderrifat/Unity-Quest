@@ -10,7 +10,14 @@ const Register = () => {
   const [error, setError] = useState("");
   const [showPassowrd, setShowPassword] = useState(false);
   const [passwordError, setpasswordError] = useState("");
-  const { createUser, googleUser, githubUser, updateUser, loading } = useAuth();
+  const {
+    createUser,
+    googleUser,
+    githubUser,
+    updateUser,
+    loading,
+    setLoading,
+  } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -55,6 +62,7 @@ const Register = () => {
         console.log(error);
         setError(error?.message.split(":")[1]);
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
   const handleGoogle = () => {
@@ -67,6 +75,7 @@ const Register = () => {
       .catch((error) => {
         console.log(error);
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
   const handleGithub = () => {
@@ -79,6 +88,7 @@ const Register = () => {
       .catch((error) => {
         console.log(error);
         toast.error(error?.message.split(":")[1]);
+        setLoading(false);
       });
   };
   return (
