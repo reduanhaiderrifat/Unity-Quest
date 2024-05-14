@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const [error, setError] = useState("");
   const [showPassowrd, setShowPassword] = useState(false);
@@ -52,14 +53,12 @@ const Register = () => {
       return;
     }
     createUser(email, password)
-      .then((result) => {
+      .then(() => {
         updateUser(username, photo);
         navigate("/");
         toast.success("User create successfully");
-        console.log(result.user);
       })
       .catch((error) => {
-        console.log(error);
         setError(error?.message.split(":")[1]);
         toast.error(error?.message.split(":")[1]);
         setLoading(false);
@@ -67,32 +66,31 @@ const Register = () => {
   };
   const handleGoogle = () => {
     googleUser()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state ? location.state : "/");
         toast.success("User login with google successfully");
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error?.message.split(":")[1]);
         setLoading(false);
       });
   };
   const handleGithub = () => {
     githubUser()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state ? location.state : "/");
         toast.success("User login with github successfully");
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error?.message.split(":")[1]);
         setLoading(false);
       });
   };
   return (
     <div>
+      <Helmet>
+        <title>UnityQuest-Singup</title>
+      </Helmet>
       <div className="flex bg-[#01456A] overflow-hidden">
         <div className="hidden lg:flex xl:flex">
           <img

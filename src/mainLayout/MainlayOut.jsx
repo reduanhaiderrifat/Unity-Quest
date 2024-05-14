@@ -4,7 +4,7 @@ import Footer from "../shared/Footer";
 
 const MainlayOut = () => {
   return (
-    <div className="px-4 mx-auto">
+    <div className="md:px-4 mx-auto">
       <Navbar />
       <div className="">
         <Outlet />

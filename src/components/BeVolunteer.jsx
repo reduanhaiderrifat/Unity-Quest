@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
+import useAuth from "../hooks/useAuth";
 const BeVolunteer = () => {
   const [singleData, setSingleData] = useState({});
+  const { user } = useAuth();
+  const email = user?.email;
   const [loader, sestLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
-  console.log(id);
   const {
     title,
     thumbnail,
@@ -35,8 +38,6 @@ const BeVolunteer = () => {
     </div>;
   }
 
-  console.log(singleData);
-
   const handleRequest = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -61,10 +62,10 @@ const BeVolunteer = () => {
       deadline,
       number,
       username,
+      email,
       useremail,
       id,
     };
-    console.log(requestData);
     try {
       const response = await axiosSecure.post(`/request`, requestData);
       if (response.data.insertedId) {
@@ -77,16 +78,26 @@ const BeVolunteer = () => {
       //update number of volunteer
       await axiosSecure.patch(`/requestUpdate/${id}`, number);
     } catch (error) {
-      console.error(error);
+      if (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+      }
     }
   };
   return (
     <div>
+      <Helmet>
+        <title>UnityQuest-Apply-Request</title>
+      </Helmet>
       <form onSubmit={handleRequest}>
-        <div className="flex items-center border p-4 bg-[#111827] gap-4">
-          <div className="w-2/3">
-            <div className="flex  gap-2">
-              <div className="form-control w-1/2">
+        <div className="grid grid-cols-1 lg:flex items-center border p-4 bg-[#111827] gap-4">
+          <div className="lg:w-2/3">
+            <div className="grid grid-cols-1 xl:flex  gap-2">
+              <div className="form-control xl:w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Post Title
@@ -102,7 +113,7 @@ const BeVolunteer = () => {
                 />
               </div>
 
-              <div className="form-control w-1/2">
+              <div className="form-control xl:w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Thumbnail
@@ -118,8 +129,8 @@ const BeVolunteer = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-6">
-              <div className="w-1/3 space-y-5">
+            <div className="grid grid-cols-1 xl:flex gap-6">
+              <div className="xl:w-1/3 space-y-5">
                 <div className="form-control ">
                   <label className="label">
                     <span className="label-text text-white font-semibold">
@@ -150,7 +161,7 @@ const BeVolunteer = () => {
                 </div>
               </div>
 
-              <div className="form-control w-2/3">
+              <div className="form-control xl:w-2/3">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Description
@@ -168,8 +179,8 @@ const BeVolunteer = () => {
                 ></textarea>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="form-control w-2/5">
+            <div className="grid grid-cols-1 md:flex items-center gap-4">
+              <div className="form-control md:w-2/5">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Number of volunteers
@@ -184,7 +195,7 @@ const BeVolunteer = () => {
                   readOnly
                 />
               </div>{" "}
-              <div className="form-control w-3/5">
+              <div className="form-control md:w-3/5">
                 <label className="label">
                   <span className="label-text text-white font-semibold ">
                     Deadline
@@ -202,11 +213,11 @@ const BeVolunteer = () => {
               </div>
             </div>
           </div>
-          <div className=" space-y-8">
-            <div className="">
+          <div className="lg:w-3/5 space-y-8">
+            <div className="form-control lg:3/4 xl:w-full">
               <label>
                 <span className=" text-white font-semibold text-lg">
-                  Suggestion
+                  Suggestion (only 250 words)
                 </span>
               </label>
               <textarea
@@ -214,6 +225,7 @@ const BeVolunteer = () => {
                 id=""
                 cols="45"
                 rows="8"
+                maxLength="250"
                 className=" rounded-lg"
                 placeholder="text..."
               ></textarea>
@@ -233,8 +245,8 @@ const BeVolunteer = () => {
         </div>
         <div className="bg-[#111827]">
           <div className="flex items-center gap-12 p-4 ">
-            <div className="flex w-full gap-2 mx-4">
-              <div className="form-control w-1/2">
+            <div className="grid grid-cols-1 md:flex w-full gap-2 mx-4">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Name
@@ -250,7 +262,7 @@ const BeVolunteer = () => {
                 />
               </div>
 
-              <div className="form-control w-1/2">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text text-white font-semibold">
                     Email

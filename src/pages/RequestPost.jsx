@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const RequestPost = () => {
   const [posts, setPosts] = useState();
-  console.log(posts);
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -44,7 +44,14 @@ const RequestPost = () => {
           setPosts(remaining);
         }
       } catch (error) {
-        console.error("Error deleting post:", error);
+        if (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          });
+        }
       }
     }
   };
@@ -62,54 +69,59 @@ const RequestPost = () => {
     );
   }
   return (
-    <div className="min-h-[calc(100vh-230px)] ">
-      {loader ? (
-        <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
-          <span className="loading loading-spinner loading-lg"></span>
-        </div>
-      ) : (
-        <>
-          <div className="overflow-x-auto">
-            <table className="table">
-              {/* head */}
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Category</th>
-                  <th>Post Title</th>
-                  <th>Location</th>
-                  <th>Deadline</th>
-                  <th>Request</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* row 1 */}
-                {posts.map((post, idx) => (
-                  <tr key={post._id}>
-                    <th>{idx + 1}</th>
-                    <td>{post?.category}</td>
-
-                    <td>{post?.title}</td>
-                    <td>{post?.location}</td>
-                    <td>{post?.deadline.split("T")[0]}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          handleDelete(post._id);
-                        }}
-                        className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
-                      >
-                        Cancel
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+    <>
+      <Helmet>
+        <title>UnityQuest-Request-Post</title>
+      </Helmet>
+      <div className="min-h-[calc(100vh-230px)] ">
+        {loader ? (
+          <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
+            <span className="loading loading-spinner loading-lg"></span>
           </div>
-        </>
-      )}
-    </div>
+        ) : (
+          <>
+            <div className="overflow-x-auto">
+              <table className="table bg-base-300">
+                {/* head */}
+                <thead>
+                  <tr className="bg-green-500 text-white text-lg">
+                    <th></th>
+                    <th>Category</th>
+                    <th>Post Title</th>
+                    <th>Location</th>
+                    <th>Deadline</th>
+                    <th>Request</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {posts.map((post, idx) => (
+                    <tr key={post._id}>
+                      <th>{idx + 1}</th>
+                      <td>{post?.category}</td>
+
+                      <td>{post?.title}</td>
+                      <td>{post?.location}</td>
+                      <td>{post?.deadline.split("T")[0]}</td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            handleDelete(post._id);
+                          }}
+                          className="btn w-2/3  my-2   bg-gradient-to-r from-red-500 to-orange-500 text-white  text-lg"
+                        >
+                          Cancel
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

@@ -69,10 +69,10 @@ const OwnRequest = () => {
       ) : (
         <>
           <div className="overflow-x-auto">
-            <table className="table">
+            <table className="table bg-base-300">
               {/* head */}
               <thead>
-                <tr>
+                <tr className="bg-blue-400 text-lg text-white">
                   <th></th>
                   <th>Category</th>
                   <th>Post Title</th>

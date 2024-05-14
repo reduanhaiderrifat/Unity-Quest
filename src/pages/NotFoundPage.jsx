@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useRouteError } from "react-router-dom";
 
@@ -5,6 +6,9 @@ const NotFoundPage = () => {
   const error = useRouteError();
   return (
     <div>
+      <Helmet>
+        <title>UnityQuest-Page-Not-Found</title>
+      </Helmet>
       <div className="  grid grid-cols-1    ">
         <div className=" h-screen  flex gap-3 flex-col text-center -mt-9 justify-center items-center">
           <div className="w-96 space-y-4 bg-white p-5 rounded-lg">

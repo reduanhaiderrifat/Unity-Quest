@@ -6,6 +6,7 @@ import { useState } from "react";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { singInUser, googleUser, githubUser, loading, setLoading } = useAuth();
@@ -22,10 +23,9 @@ const Login = () => {
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(data);
+
     singInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state ? location.state : "/");
         toast.success("User login successfully");
       })
@@ -36,13 +36,11 @@ const Login = () => {
   };
   const handleGoogle = () => {
     googleUser()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state ? location.state : "/");
         toast.success("User login with google successfully");
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error?.message.split(":")[1]);
         setLoading(false);
       });
@@ -50,13 +48,11 @@ const Login = () => {
 
   const handleGithub = () => {
     githubUser()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state ? location.state : "/");
         toast.success("User login with github successfully");
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error?.message.split(":")[1]);
         setLoading(false);
       });
@@ -74,6 +70,9 @@ const Login = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>UnityQuest-Login</title>
+      </Helmet>
       <div className="bg-[#00684A]">
         <div className="hero-content flex-col md:flex-row-reverse lg:flex-row-reverse">
           <div className="w-2/3 hidden  lg:flex xl:flex relative">
@@ -83,7 +82,7 @@ const Login = () => {
               alt=""
             />
             <div className="w-[35%] h-[60%] bg-[#00684A] absolute left-10 text-white">
-              <p className="mt-16 leading-8 text-md font-semibold">
+              <p className="lg:mt-6 xl:mt-16 xl:leading-8 text-md font-semibold">
                 Volunteering offers individuals a profound sense of purpose and
                 fulfillment by allowing them to contribute their skills to
                 causes they care about. Additionally, it plays a vital role in

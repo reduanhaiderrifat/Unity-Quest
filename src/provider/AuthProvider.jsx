@@ -53,14 +53,17 @@ const AuthProvider = ({ children }) => {
       setUser(currentuser);
       const loggedUser = { email: currentuser?.email };
       if (currentuser) {
-        axiosSecure.post(`/jwt`, loggedUser).then(() => {});
+        axiosSecure.post(`/jwt`, loggedUser).then(() => {
+          setLoading(false);
+        });
       } else {
-        axiosSecure.post(`/logout`, loggedUser).then(() => {});
+        axiosSecure.post(`/logout`, loggedUser).then(() => {
+          setLoading(false);
+        });
       }
-      setLoading(false);
     });
     return () => unsuscribe();
-  }, []);
+  }, [reloader, axiosSecure]);
   const authInfo = {
     createUser,
     singInUser,

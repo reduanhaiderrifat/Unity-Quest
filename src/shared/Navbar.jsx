@@ -5,7 +5,6 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { FiLogOut } from "react-icons/fi";
 import { IoCloseSharp } from "react-icons/io5";
 import { Link, NavLink } from "react-router-dom";
-
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 import { IoIosArrowDown } from "react-icons/io";
@@ -150,13 +149,13 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="my-4">
+      <div className="my-2 p-4 bg-base-300 rounded-2xl ">
         <div className="flex justify-between items-center shadow-sm">
           <div className="flex items-center">
             <div className="">
               <button
                 onClick={() => setOpen(!open)}
-                className="lg:hidden mr-2 hover:bg-slate-200 p-2 rounded-lg"
+                className="lg:hidden mr-2 hover:bg-slate-200 p-2 rounded-lg "
               >
                 {open === true ? (
                   <IoCloseSharp size={30} />
@@ -171,8 +170,8 @@ const Navbar = () => {
                     : "-translate-x-full pointer-events-none"
                 }`}
               >
-                <div className=" h-full w-64 ">
-                  <ul className="bg-white p-4 px-6 text-black shadow-lg space-y-5 flex flex-col rounded-r-lg">
+                <div className=" h-full w-full ">
+                  <ul className="bg-base-200 p-4 px-6  shadow-lg space-y-5 flex flex-col rounded-r-lg">
                     {links}
                   </ul>
                 </div>
@@ -298,6 +297,9 @@ const Navbar = () => {
                       </h3>
                       <p className=" text-black">{user.email}</p>
                     </div>
+                    <button className="btn mb-3">
+                      <Link to="/ownreport">Your Report</Link>
+                    </button>
                     <button onClick={handleLogout} className=" btn">
                       <FiLogOut size={25} /> Logout
                     </button>

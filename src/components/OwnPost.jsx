@@ -6,7 +6,6 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const OwnPost = () => {
   const [posts, setPosts] = useState();
-  console.log(posts);
   const [loader, sestLoading] = useState(true);
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
@@ -42,16 +41,23 @@ const OwnPost = () => {
             text: "Your Post has been deleted.",
             icon: "success",
           });
-          const remaining = posts.filter((post) => post._id !== id);
+          const remaining = posts?.filter((post) => post._id !== id);
           setPosts(remaining);
         }
       } catch (error) {
-        console.error("Error deleting post:", error);
+        if (error) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: '<a href="#">Why do I have this issue?</a>',
+          });
+        }
       }
     }
   };
 
-  if (!posts || (posts.length === 0 && !loader)) {
+  if (!posts || posts.length === 0) {
     return (
       <div className="min-h-[calc(100vh-230px)] flex flex-col justify-center items-center gap-4">
         <h2 className=" text-5xl font-semibold">
@@ -82,16 +88,16 @@ const OwnPost = () => {
               <table className="table">
                 {/* head */}
                 <thead>
-                  <tr>
+                  <tr className="bg-green-500 text-white text-lg">
                     <th></th>
                     <th>Category</th>
                     <th>Post Title</th>
-                    <th>Number of Volunteers</th>
+                    <th>Quantity</th>
                     <th>Update</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="bg-base-300">
                   {/* row 1 */}
                   {posts?.map((post, idx) => (
                     <tr key={post._id}>

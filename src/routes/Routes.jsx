@@ -12,6 +12,8 @@ import NotFoundPage from "../pages/NotFoundPage";
 import VeiwDetailsVolunteer from "../components/VeiwDetailsVolunteer";
 import BeVolunteer from "../components/BeVolunteer";
 import Update from "../pages/Update";
+import Copyright from "../pages/Copyright";
+import OwnReport from "../components/OwnReport";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,6 @@ const router = createBrowserRouter([
         path: "/addPost",
         element: (
           <PriviteRoute>
-            {" "}
             <AddVholenteerPost />
           </PriviteRoute>
         ),
@@ -83,6 +84,14 @@ const router = createBrowserRouter([
             <Update />
           </PriviteRoute>
         ),
+      },
+      {
+        path: "/copyright",
+        element: <Copyright />,
+      },
+      {
+        path: "/ownreport",
+        element: <OwnReport />,
       },
     ],
   },

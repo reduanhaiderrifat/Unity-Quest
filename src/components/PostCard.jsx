@@ -8,9 +8,10 @@ const PostCard = ({ post, idx }) => {
     <div className=" overflow-hidden">
       <Fade direction={idx % 2 === 0 ? "left" : "right"}>
         <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <a href="#">
-            <img className="rounded-t-lg" src={thumbnail} alt="" />
-          </a>
+          <div>
+            <img className="rounded-t-lg h-60 w-full" src={thumbnail} alt="" />
+          </div>
+
           <div className="p-5">
             <div className="flex justify-between">
               <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
@@ -18,7 +19,7 @@ const PostCard = ({ post, idx }) => {
               </h5>
               <div className="tooltip tooltip-bottom" data-tip="Deadline">
                 <button className="text-black text-lg">
-                  <p>{deadline.split("T")[0]}</p>
+                  <p>{deadline?.split("T")[0]}</p>
                 </button>
               </div>
             </div>

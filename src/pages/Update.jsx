@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Update = () => {
   const { id } = useParams();
@@ -42,7 +43,7 @@ const Update = () => {
     const location = form.location.value;
     const category = form.category.value;
     const description = form.description.value;
-    const number = form.number.value;
+    const number = parseInt(form.number.value);
     const Organaization_name = form.Organaization_name.value;
     const organizer_email = form.organizer_email.value;
     const postData = {
@@ -56,7 +57,6 @@ const Update = () => {
       Organaization_name,
       organizer_email,
     };
-    console.log(postData);
     try {
       const response = await axiosSecure.put(`/update/${id}`, postData);
       if (response.data.modifiedCount > 0) {
@@ -67,11 +67,21 @@ const Update = () => {
         });
       }
     } catch (error) {
-      console.error(error);
+      if (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
+      }
     }
   };
   return (
     <div>
+      <Helmet>
+        <title>UnityQuest-Update-Post</title>
+      </Helmet>
       <form onSubmit={handleUpdate}>
         <div className="grid grid-cols-1 lg:flex xl:flex items-center border p-4 bg-[#111827] gap-4">
           <div className=" lg:w-1/3 xl:w-1/3 text-white text-center font-semibold space-y-4">
@@ -137,21 +147,24 @@ const Update = () => {
                   <label>
                     <span className="text-white font-semibold">Category</span>
                   </label>
-                  <select
-                    name="category"
-                    id=""
-                    className="input input-bordered select"
-                    defaultValue={singleData?.category}
-                    required
-                  >
-                    <option value="" disabled>
-                      choose one
-                    </option>
-                    <option value="Healthcare"> Healthcare</option>
-                    <option value="Education"> Education</option>
-                    <option value="Social service"> Social service</option>
-                    <option value="Animal welfare">Animal welfare</option>
-                  </select>
+                  {singleData && (
+                    <select
+                      name="category"
+                      id=""
+                      className="input input-bordered"
+                      defaultValue={singleData.category || ""}
+                      required
+                    >
+                      <option value="" disabled>
+                        Choose one
+                      </option>
+                      <option value="Healthcare">Healthcare</option>
+                      <option value="Education">Education</option>
+                      <option value="Social service">Social service</option>
+                      <option value="Animal welfare">Animal welfare</option>
+                      <option value="Orphans Care">Orphans Care</option>
+                    </select>
+                  )}
                 </div>
               </div>
 
