@@ -39,24 +39,22 @@ const VolunteerNeedCard = () => {
                   </figure>
                 </div>
                 <div className="card-body">
-                  <div className="">
-                    <h2 className="card-title">{post?.category}</h2>
+                  <h2 className="card-title">{post?.category}</h2>
 
-                    <p className="mb-3  text-2xl font-bold text-blue-600">
+                  <p className="mb-3  text-2xl font-bold text-blue-600">
+                    {" "}
+                    {post?.title}
+                  </p>
+                  <p>
+                    <span className=" text-lg font-bold">Deadline</span>:{" "}
+                    <span className="text-lg">
                       {" "}
-                      {post?.title}
-                    </p>
-                    <p>
-                      <span className=" text-lg font-bold">Deadline</span>:{" "}
-                      <span className="text-lg">
-                        {" "}
-                        {post?.deadline?.split("T")[0]}
-                      </span>
-                    </p>
-                    <p className="text-lg">
-                      <strong>Need Volunteers :</strong> {post?.number}
-                    </p>
-                  </div>
+                      {post?.deadline?.split("T")[0]}
+                    </span>
+                  </p>
+                  <p className="text-lg">
+                    <strong>Need Volunteers :</strong> {post?.number}
+                  </p>
                 </div>
                 <div className=" w-full">
                   <Link

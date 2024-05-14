@@ -27,8 +27,8 @@ const Slider = () => {
               src="https://i.ibb.co/HNw1CdH/flood.jpg"
               alt=""
             />
-            <div className=" absolute top-[20%] lg:top-[30%] mx-[20%]">
-              <h2 className="text-2xl text-white lg:text-5xl hover:text-black">
+            <div className=" absolute top-[16%] lg:top-[30%] mx-[20%]">
+              <h2 className="text-xl md:text-2xl text-white lg:text-5xl hover:text-black">
                 Building Hope: Mobilizing Volunteers for Flood Relief in
                 Bangladesh
               </h2>
@@ -71,8 +71,8 @@ const Slider = () => {
               src="https://i.ibb.co/NtZ3rTF/slider3.jpg"
               alt=""
             />
-            <div className=" absolute top-[20%] lg:top-[30%] mx-[20%]">
-              <h2 className="text-2xl text-white lg:text-5xl hover:text-black">
+            <div className=" absolute top-[16%] lg:top-[30%] mx-[20%]">
+              <h2 className="text-xl md:text-2xl text-white lg:text-5xl hover:text-black">
                 Wildlife & Animal Care Volunteer Abroad Programs
               </h2>
               <p className=" text-white font-semibold text-sm md:text-lg lg:text-xl xl:text-2xl hover:text-black">

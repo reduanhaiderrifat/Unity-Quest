@@ -63,7 +63,7 @@ const VeiwDetailsVolunteer = () => {
           </div>
           <div className="flex ">
             <div className="flex flex-col md:max-w-3xl p-6 space-y-6 overflow-hidden rounded-lg shadow-md dark:bg-gray-50 dark:text-gray-800">
-              <div className="flex justify-between">
+              <div className="flex justify-between gap-2">
                 <div className="flex space-x-4">
                   <div
                     className="tooltip tooltip-right"
@@ -79,11 +79,7 @@ const VeiwDetailsVolunteer = () => {
                   </div>
 
                   <div className="flex flex-col space-y-1">
-                    <p
-                      rel="noopener noreferrer"
-                      href="#"
-                      className="text-md font-semibold"
-                    >
+                    <p className="text-md font-semibold">
                       <div
                         className="tooltip tooltip-right"
                         data-tip="Organaization Name"
@@ -96,7 +92,9 @@ const VeiwDetailsVolunteer = () => {
                         className="tooltip tooltip-right"
                         data-tip="Organaization Email"
                       >
-                        <button>{organizer_email}</button>
+                        <button className=" break-all">
+                          {organizer_email}
+                        </button>
                       </div>
                     </span>
                   </div>

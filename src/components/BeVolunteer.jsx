@@ -28,7 +28,6 @@ const BeVolunteer = () => {
       setSingleData(data);
       sestLoading(false);
     };
-
     getData();
   }, [id, axiosSecure]);
 

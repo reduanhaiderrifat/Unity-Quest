@@ -267,7 +267,7 @@ const Update = () => {
             </div>
           </div>
           <div className=" flex justify-end">
-            <button className="btn w-full lg:w-3/5  mb-4 lg:mr-10 bg-transparent hover:bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg">
+            <button className="btn w-4/5 mx-auto lg:w-3/5  mb-4 lg:mr-10 bg-transparent hover:bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg">
               Update Post
             </button>
           </div>

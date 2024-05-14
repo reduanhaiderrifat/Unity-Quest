@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       {
         path: "/need",
         element: <NeedVolunter />,
+        loader: () => fetch(`${import.meta.env.VITE_URL_SERVER}/allpost`),
       },
       {
         path: "/login",
