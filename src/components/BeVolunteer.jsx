@@ -94,7 +94,7 @@ const BeVolunteer = () => {
         <title>UnityQuest-Apply-Request</title>
       </Helmet>
       <form onSubmit={handleRequest}>
-        <div className="grid grid-cols-1 lg:flex items-center border p-4 bg-[#111827] gap-4">
+        <div className="grid grid-cols-1 lg:flex items-center  p-4 bg-[#111827] gap-4">
           <div className="lg:w-2/3">
             <div className="grid grid-cols-1 xl:flex  gap-2">
               <div className="form-control xl:w-1/2">
@@ -216,7 +216,7 @@ const BeVolunteer = () => {
           <div className="lg:w-3/5 space-y-8">
             <div className="form-control lg:3/4 xl:w-full">
               <label>
-                <span className=" text-white font-semibold text-lg">
+                <span className=" text-white font-semibold text-lg ">
                   Suggestion (only 250 words)
                 </span>
               </label>
@@ -226,7 +226,7 @@ const BeVolunteer = () => {
                 cols="45"
                 rows="8"
                 maxLength="250"
-                className=" rounded-lg"
+                className=" rounded-lg textarea"
                 placeholder="text..."
               ></textarea>
             </div>
@@ -237,7 +237,7 @@ const BeVolunteer = () => {
                 </span>
               </label>
               <br />
-              <select name="status" id="">
+              <select name="status" id="" className="select">
                 <option value="requested">Requested</option>
               </select>
             </div>

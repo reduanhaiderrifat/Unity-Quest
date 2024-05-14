@@ -41,8 +41,7 @@ const NeedVolunter = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
-          footer: '<a href="#">Why do I have this issue?</a>',
+          text: "Please provide the title!",
         });
       }
     }
@@ -74,13 +73,13 @@ const NeedVolunter = () => {
       <Helmet>
         <title>UnityQuest-Need-Volunteer</title>
       </Helmet>
-      <div className="min-h-[calc(100vh-230px)] bg-base-300">
+      <div className="min-h-[calc(100vh-230px)] bg-base-100">
         <div className="flex justify-center w-full ">
           <div className="border-b-4 border-green-600 p-2 mt-2 rounded-full w-full md:w-2/3 lg:w-1/3">
             <form onSubmit={(e) => handleSearch(e)}>
               <label className="flex items-center">
                 <input
-                  className=" rounded-full w-full"
+                  className="input rounded-full w-full"
                   type="text"
                   name="search"
                   placeholder="search by post title..."
@@ -102,12 +101,12 @@ const NeedVolunter = () => {
             </div>
             <ul
               tabIndex={0}
-              className="p-2 shadow-md overflow-y-scroll h-96 menu dropdown-content z-50 bg-white rounded-md w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+              className="p-2 shadow-md overflow-y-scroll h-96 menu dropdown-content z-50 bg-white text-black rounded-md w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
               {posts?.map((post) => (
                 <li key={post._id} className="mb-3 border-b-2 border-gray-200">
                   <div className="flex items-center justify-between">
-                    <span className="text-base">{post?.title}</span>
+                    <span className="">{post?.title}</span>
                     <button
                       onClick={() => copyText(post?.title)}
                       className="ml-2 px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"

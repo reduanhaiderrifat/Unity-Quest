@@ -34,7 +34,7 @@ const Home = () => {
           <div className=" w-full flex justify-center mt-12">
             <Link
               to="/need"
-              className="btn w-1/3 shadow-black  text-xl lg:text-3xl font-bold bg-300% bg-gradient-to-r from-orange-700 via-blue-500 to-green-400 text-transparent bg-clip-text animate-gradient"
+              className="btn w-1/3 shadow-black box-shadow  text-xl lg:text-3xl font-bold bg-300% bg-gradient-to-r from-orange-700 via-blue-500 to-green-400 text-transparent bg-clip-text animate-gradient"
             >
               See All Post
             </Link>

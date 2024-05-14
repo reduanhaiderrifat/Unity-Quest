@@ -7,26 +7,26 @@ const PostCard = ({ post, idx }) => {
   return (
     <div className=" overflow-hidden">
       <Fade direction={idx % 2 === 0 ? "left" : "right"}>
-        <div className=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
           <div>
             <img className="rounded-t-lg h-60 w-full" src={thumbnail} alt="" />
           </div>
 
           <div className="p-5">
             <div className="flex justify-between">
-              <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+              <h5 className="mb-2 text-3xl font-bold tracking-tight  dark:text-white">
                 {category}
               </h5>
               <div className="tooltip tooltip-bottom" data-tip="Deadline">
-                <button className="text-black text-lg">
+                <button className=" text-lg">
                   <p>{deadline?.split("T")[0]}</p>
                 </button>
               </div>
             </div>
-            <p className="mb-3 text-lg font-normal text-gray-700 dark:text-gray-400">
+            <p className="mb-3 text-lg font-normal  dark:text-gray-400">
               <strong> Title</strong> : {title}
             </p>
-            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 flex items-center gap-3">
+            <p className="mb-3 font-normal  dark:text-gray-400 flex items-center gap-3">
               <span className=" font-bold  text-xl"> Location:</span>
               <span className="flex items-center gap-1 text-blue-500 cursor-pointer">
                 <ImLocation2 /> {location}
