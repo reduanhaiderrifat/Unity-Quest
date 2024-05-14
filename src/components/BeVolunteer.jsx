@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
@@ -8,7 +8,7 @@ const BeVolunteer = () => {
   const [singleData, setSingleData] = useState({});
   const { user } = useAuth();
   const email = user?.email;
-  const [loader, sestLoading] = useState(true);
+  const [loader, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const {
@@ -22,15 +22,27 @@ const BeVolunteer = () => {
     Organaization_name,
     organizer_email,
   } = singleData;
-  useEffect(() => {
-    const getData = async () => {
+  // useEffect(() => {
+  // const getData = async () => {
+  //   const { data } = await axiosSecure.get(`/singlePost/${id}`);
+  //   setSingleData(data);
+  //   sestLoading(false);
+  // };
+  //   getData();
+  // }, [id, axiosSecure]);
+  const getData = useCallback(async () => {
+    try {
       const { data } = await axiosSecure.get(`/singlePost/${id}`);
       setSingleData(data);
-      sestLoading(false);
-    };
+      setLoading(false);
+    } catch (error) {
+      // Handle errors here
+      console.error("Error fetching data:", error);
+    }
+  }, [id, axiosSecure, setSingleData, setLoading]);
+  useEffect(() => {
     getData();
-  }, [id, axiosSecure]);
-
+  }, [getData]);
   if (loader) {
     <div className="min-h-[calc(100vh-230px)] flex justify-center items-center">
       <span className="loading loading-spinner loading-lg"></span>
@@ -76,6 +88,8 @@ const BeVolunteer = () => {
       }
       //update number of volunteer
       await axiosSecure.patch(`/requestUpdate/${id}`, number);
+      // Fetch data again amd rerender again
+      getData();
     } catch (error) {
       if (error) {
         Swal.fire({
@@ -87,204 +101,225 @@ const BeVolunteer = () => {
       }
     }
   };
+  const handleNoNeed = () => {
+    Swal.fire({
+      icon: "info",
+      title: "No Volunteer Needed",
+      text: "There are currently no volunteer opportunities available.",
+    });
+  };
   return (
     <div>
       <Helmet>
         <title>UnityQuest-Apply-Request</title>
       </Helmet>
-      <form onSubmit={handleRequest}>
-        <div className="grid grid-cols-1 lg:flex items-center  p-4 bg-[#111827] gap-4">
-          <div className="lg:w-2/3">
-            <div className="grid grid-cols-1 xl:flex  gap-2">
-              <div className="form-control xl:w-1/2">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Post Title
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="title"
-                  name="title"
-                  className="input input-bordered w-full cursor-no-drop"
-                  value={title}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-control xl:w-1/2">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Thumbnail
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="thumbnailURL"
-                  name="thumbnail"
-                  className="input input-bordered w-full cursor-no-drop"
-                  value={thumbnail}
-                  readOnly
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 xl:flex gap-6">
-              <div className="xl:w-1/3 space-y-5">
-                <div className="form-control ">
+      <div className="bg-[#111827]">
+        <form onSubmit={handleRequest}>
+          <div className="grid grid-cols-1 lg:flex items-center  p-4 bg-[#111827] gap-4">
+            <div className="lg:w-2/3">
+              <div className="grid grid-cols-1 xl:flex  gap-2">
+                <div className="form-control xl:w-1/2">
                   <label className="label">
                     <span className="label-text text-white font-semibold">
-                      Location
+                      Post Title
                     </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="location"
-                    name="location"
-                    className="input input-bordered cursor-no-drop"
-                    value={location}
+                    placeholder="title"
+                    name="title"
+                    className="input input-bordered w-full cursor-no-drop"
+                    value={title}
                     readOnly
                   />
                 </div>
-                <div className="form-control ">
-                  <label>
-                    <span className="text-white font-semibold">Category</span>
+
+                <div className="form-control xl:w-1/2">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold">
+                      Thumbnail
+                    </span>
                   </label>
                   <input
                     type="text"
-                    placeholder="category"
-                    name="category"
-                    className="input input-bordered cursor-no-drop"
-                    value={category}
+                    placeholder="thumbnailURL"
+                    name="thumbnail"
+                    className="input input-bordered w-full cursor-no-drop"
+                    value={thumbnail}
                     readOnly
                   />
                 </div>
               </div>
+              <div className="grid grid-cols-1 xl:flex gap-6">
+                <div className="xl:w-1/3 space-y-5">
+                  <div className="form-control ">
+                    <label className="label">
+                      <span className="label-text text-white font-semibold">
+                        Location
+                      </span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="location"
+                      name="location"
+                      className="input input-bordered cursor-no-drop"
+                      value={location}
+                      readOnly
+                    />
+                  </div>
+                  <div className="form-control ">
+                    <label>
+                      <span className="text-white font-semibold">Category</span>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="category"
+                      name="category"
+                      className="input input-bordered cursor-no-drop"
+                      value={category}
+                      readOnly
+                    />
+                  </div>
+                </div>
 
-              <div className="form-control xl:w-2/3">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Description
+                <div className="form-control xl:w-2/3">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold">
+                      Description
+                    </span>
+                  </label>
+                  <textarea
+                    rows={4}
+                    cols={10}
+                    type="text"
+                    placeholder="description"
+                    name="description"
+                    className="textarea textarea-bordered cursor-no-drop"
+                    value={description}
+                    readOnly
+                  ></textarea>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:flex items-center gap-4">
+                <div className="form-control md:w-2/5">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold">
+                      Number of volunteers
+                    </span>
+                  </label>
+                  <input
+                    type="number"
+                    name="number"
+                    placeholder="number"
+                    className="input input-bordered w-full cursor-no-drop"
+                    value={number}
+                    readOnly
+                  />
+                </div>{" "}
+                <div className="form-control md:w-3/5">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold ">
+                      Deadline
+                    </span>
+                  </label>
+
+                  <input
+                    type="text"
+                    placeholder="deadline"
+                    name="deadline"
+                    className="input input-bordered w-full cursor-no-drop"
+                    value={deadline?.split("T")[0]}
+                    readOnly
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-3/5 space-y-8">
+              <div className="form-control lg:3/4 xl:w-full">
+                <label>
+                  <span className=" text-white font-semibold text-lg ">
+                    Suggestion (only 250 words)
                   </span>
                 </label>
                 <textarea
-                  rows={4}
-                  cols={10}
-                  type="text"
-                  placeholder="description"
-                  name="description"
-                  className="textarea textarea-bordered cursor-no-drop"
-                  value={description}
-                  readOnly
+                  name="suggestion"
+                  id=""
+                  cols="45"
+                  rows="8"
+                  maxLength="250"
+                  className=" rounded-lg textarea"
+                  placeholder="text..."
                 ></textarea>
               </div>
+              <div className="">
+                <label>
+                  <span className=" text-white font-semibold text-lg">
+                    Status
+                  </span>
+                </label>
+                <br />
+                <select name="status" id="" className="select">
+                  <option value="requested">Requested</option>
+                </select>
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:flex items-center gap-4">
-              <div className="form-control md:w-2/5">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Number of volunteers
-                  </span>
-                </label>
-                <input
-                  type="number"
-                  name="number"
-                  placeholder="number"
-                  className="input input-bordered w-full cursor-no-drop"
-                  value={number}
-                  readOnly
-                />
-              </div>{" "}
-              <div className="form-control md:w-3/5">
-                <label className="label">
-                  <span className="label-text text-white font-semibold ">
-                    Deadline
-                  </span>
-                </label>
+          </div>
+          <div className="bg-[#111827]">
+            <div className="flex items-center gap-12 p-4 ">
+              <div className="grid grid-cols-1 md:flex w-full gap-2 mx-4">
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold">
+                      Name
+                    </span>
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Organizer name"
+                    className="input input-bordered  w-full cursor-no-drop"
+                    value={Organaization_name}
+                    readOnly
+                  />
+                </div>
 
-                <input
-                  type="text"
-                  placeholder="deadline"
-                  name="deadline"
-                  className="input input-bordered w-full cursor-no-drop"
-                  value={deadline?.split("T")[0]}
-                  readOnly
-                />
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text text-white font-semibold">
+                      Email
+                    </span>
+                  </label>
+                  <input
+                    type="email"
+                    name="useremail"
+                    placeholder="organizer email "
+                    className="input input-bordered w-full cursor-no-drop"
+                    value={organizer_email}
+                    readOnly
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="lg:w-3/5 space-y-8">
-            <div className="form-control lg:3/4 xl:w-full">
-              <label>
-                <span className=" text-white font-semibold text-lg ">
-                  Suggestion (only 250 words)
-                </span>
-              </label>
-              <textarea
-                name="suggestion"
-                id=""
-                cols="45"
-                rows="8"
-                maxLength="250"
-                className=" rounded-lg textarea"
-                placeholder="text..."
-              ></textarea>
-            </div>
-            <div className="">
-              <label>
-                <span className=" text-white font-semibold text-lg">
-                  Status
-                </span>
-              </label>
-              <br />
-              <select name="status" id="" className="select">
-                <option value="requested">Requested</option>
-              </select>
+            <div className=" flex justify-center">
+              {number > 0 && (
+                <button className="btn w-2/3  my-8  bg-transparent hover:bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg">
+                  Request
+                </button>
+              )}
             </div>
           </div>
-        </div>
-        <div className="bg-[#111827]">
-          <div className="flex items-center gap-12 p-4 ">
-            <div className="grid grid-cols-1 md:flex w-full gap-2 mx-4">
-              <div className="form-control md:w-1/2">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Name
-                  </span>
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  placeholder="Organizer name"
-                  className="input input-bordered  w-full cursor-no-drop"
-                  value={Organaization_name}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-control md:w-1/2">
-                <label className="label">
-                  <span className="label-text text-white font-semibold">
-                    Email
-                  </span>
-                </label>
-                <input
-                  type="email"
-                  name="useremail"
-                  placeholder="organizer email "
-                  className="input input-bordered w-full cursor-no-drop"
-                  value={organizer_email}
-                  readOnly
-                />
-              </div>
-            </div>
-          </div>
-          <div className=" flex justify-center">
-            <button className="btn w-2/3  my-8  bg-transparent hover:bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg">
+        </form>
+        <div className=" flex justify-center">
+          {number === 0 && (
+            <button
+              onClick={handleNoNeed}
+              className="btn w-2/3  my-8  bg-transparent hover:bg-gradient-to-r from-cyan-500 to-green-500 text-white border-white text-lg"
+            >
               Request
             </button>
-          </div>
+          )}
         </div>
-      </form>
+      </div>
     </div>
   );
 };
