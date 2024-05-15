@@ -22,21 +22,12 @@ const BeVolunteer = () => {
     Organaization_name,
     organizer_email,
   } = singleData;
-  // useEffect(() => {
-  // const getData = async () => {
-  //   const { data } = await axiosSecure.get(`/singlePost/${id}`);
-  //   setSingleData(data);
-  //   sestLoading(false);
-  // };
-  //   getData();
-  // }, [id, axiosSecure]);
   const getData = useCallback(async () => {
     try {
       const { data } = await axiosSecure.get(`/singlePost/${id}`);
       setSingleData(data);
       setLoading(false);
     } catch (error) {
-      // Handle errors here
       console.error("Error fetching data:", error);
     }
   }, [id, axiosSecure, setSingleData, setLoading]);
@@ -234,7 +225,7 @@ const BeVolunteer = () => {
                 </div>
               </div>
             </div>
-            <div className="lg:w-3/5 space-y-8">
+            <div className="lg:w-3/5">
               <div className="form-control lg:3/4 xl:w-full">
                 <label>
                   <span className=" text-white font-semibold text-lg ">
