@@ -8,14 +8,14 @@ const VolunteerRulesAndCopyright = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const email = user?.email;
+  const photo = user?.photoURL;
 
   const handleReportViolation = async (e) => {
     e.preventDefault();
     const form = e.target;
     const report = form.report.value;
     const name = form.name.value;
-    const later = { report, name, email };
-    console.log(later);
+    const later = { report, name, email, photo };
     try {
       const response = await axiosSecure.post(`/copy`, later);
       if (response.data.insertedId) {
@@ -25,6 +25,7 @@ const VolunteerRulesAndCopyright = () => {
     } catch (error) {
       toast.error("Report can not sent");
     }
+    document.getElementById("my_modal_2").close();
   };
   return (
     <div className="flex justify-center my-4">
@@ -92,7 +93,7 @@ const VolunteerRulesAndCopyright = () => {
             className="modal modal-bottom sm:modal-middle"
           >
             <div className="modal-box">
-              <form method="dialog" onSubmit={handleReportViolation}>
+              <form onSubmit={handleReportViolation}>
                 <input
                   type="text"
                   name="name"
@@ -108,20 +109,14 @@ const VolunteerRulesAndCopyright = () => {
                   maxLength={250}
                   rows="8"
                 ></textarea>
-                <button className="btn text-md bg-gradient-to-r from-cyan-500 to-green-500 text-white">
+                <button
+                  type="submit"
+                  onClick={() => document.getElementById("my_modal_2").close()}
+                  className="btn text-md bg-gradient-to-r from-cyan-500 to-green-500 text-white"
+                >
                   submit
                 </button>
               </form>
-
-              <div className="">
-                {" "}
-                <form
-                  method="dialog"
-                  className="modal-backdrop flex justify-end "
-                >
-                  <button className="btn rounded-full">X</button>
-                </form>
-              </div>
             </div>
           </dialog>
         </p>
