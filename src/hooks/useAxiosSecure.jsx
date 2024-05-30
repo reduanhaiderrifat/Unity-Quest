@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { getAuth, signOut } from "firebase/auth";
 
 const axiosSecure = axios.create({
-  baseURL: "https://volunteer-management-server-lemon.vercel.app",
+  baseURL: `${import.meta.env.VITE_URL_SERVER}`,
   withCredentials: true,
 });
 

@@ -23,9 +23,9 @@ const Home = () => {
               Critical Call for Volunteers: Help Needed Right Away{" "}
             </h2>
             <p className="text-xl">
-              Volunteering is not just about giving your time; it's about making
+              Volunteering is not just about giving your time; it is about making
               a meaningful impact in the lives of others and in your community.
-              It's about coming together, regardless of our differences, to
+              It is about coming together, regardless of our differences, to
               create positive change and address important issues.
             </p>
           </div>
@@ -40,6 +40,12 @@ const Home = () => {
               See All Post
             </Link>
           </div>
+        </section>
+        <section className="mt-14 lg:mt-44">
+          <h2 className="text-3xl mb-16 font-bold text-center">
+            Make A Difference Today By <br /> Donating To Our Cause.
+          </h2>
+          <Donate />
         </section>
         <section className="mt-20 font-semibold">
           <div className="text-center ">
@@ -58,12 +64,6 @@ const Home = () => {
             Discover Our Updates & Charity <br /> News Content.
           </h2>
           <Charity />
-        </section>
-        <section className="mt-14 lg:mt-44">
-          <h2 className="text-3xl mb-16 font-bold text-center">
-            Make A Difference Today By <br /> Donating To Our Cause.
-          </h2>
-          <Donate />
         </section>
       </div>
     </>
