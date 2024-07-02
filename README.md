@@ -40,4 +40,4 @@ Check out the live site [Unity Quest](https://volunteer-management-web.web.app) 
 
 ## Github Repo
 
-- [Survey Sence Server](https://github.com/reduanhaiderrifat/Unity-Quest-server)
+- [Unity Quest Server](https://github.com/reduanhaiderrifat/Unity-Quest-server)
